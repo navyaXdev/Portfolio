@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinesh Patra — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="matrix-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand"><span>~/</span>dinesh_patra</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#tools">tools</a></li>
+    <li><a href="#repos">repos</a></li>
+    <li><a href="#goal">goal</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrapper">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-tag">&gt; initializing profile…</div>
+        <h1 class="hero-name">
+          Dinesh<br>
+          <em class="glitch" data-text="Patra">Patra</em>
+        </h1>
+        <p class="hero-sub">
+          <strong>First-Year CS Student</strong> · Aspiring Web Penetration Tester ·
+          Building skills from the command line up — Python, Linux, networks, and beyond.
+        </p>
+        <div class="hero-cta">
+          <a href="#goal" class="btn btn-primary">See my roadmap</a>
+          <a href="#skills" class="btn btn-outline">View skills</a>
+        </div>
+      </div>
+      <div class="hero-terminal">
+        <div class="term-bar">
+          <div class="term-dot r"></div>
+          <div class="term-dot y"></div>
+          <div class="term-dot g"></div>
+          <span class="term-title">bash — dinesh@kali</span>
+        </div>
+        <div class="term-body" id="terminal-body">
+          <!-- lines injected by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrapper">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">01 — about</div>
+      <h2 class="section-title">Who is Dinesh?</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p>
+          Hey — I'm <strong>Dinesh Patra</strong>, a first-year student with a genuine obsession for
+          how systems break and how to defend them. While most people my year are still learning
+          "Hello World", I'm poking around <strong>Linux internals</strong>, running network
+          scans, and cracking Wi-Fi labs in a controlled environment.
+        </p>
+        <p>
+          I started with Python and C for the fundamentals, picked up web tech (HTML, CSS, JS)
+          to understand the attack surface, and now I live in the terminal — Bash, nmap,
+          iwconfig, netstat — it's my natural habitat.
+        </p>
+        <p>
+          The end game? <strong>Professional Web Penetration Testing.</strong>
+          Every skill I'm building right now is a step on that path.
+        </p>
+      </div>
+      <div class="stat-row reveal">
+        <div class="stat-box">
+          <div class="stat-num" data-count="5">0</div>
+          <div class="stat-label">Programming Languages</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="1">0</div>
+          <div class="stat-label">Years of Study</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="30">0</div>
+          <div class="stat-label">Linux Commands Mastered</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num acid" data-count="1">0</div>
+          <div class="stat-label">Big Goal Locked In</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrapper">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">02 — skills</div>
+      <h2 class="section-title">Languages &amp; Tech</h2>
+    </div>
+    <div class="skills-grid reveal" id="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">&gt;_ lang</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-desc">Scripting, automation, network tools &amp; security scripts.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="72"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">&gt;_ lang</div>
+        <div class="skill-name">C</div>
+        <div class="skill-desc">Low-level logic, memory concepts &amp; systems fundamentals.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="60"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">&gt;_ web</div>
+        <div class="skill-name">HTML / CSS</div>
+        <div class="skill-desc">Front-end structure &amp; styling — understanding the web attack surface.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="68"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">&gt;_ web</div>
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-desc">DOM, client-side logic &amp; understanding JS injection vectors.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="50"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">&gt;_ shell</div>
+        <div class="skill-name">Bash</div>
+        <div class="skill-desc">Shell scripting, automation &amp; daily Linux workflow.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="65"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">&gt;_ os</div>
+        <div class="skill-name">Linux</div>
+        <div class="skill-desc">File system, permissions, processes &amp; networking commands.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="70"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="wrapper">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">03 — toolbox</div>
+      <h2 class="section-title">Linux &amp; Security Toolkit</h2>
+    </div>
+
+    <div style="margin-bottom:2.5rem" class="reveal">
+      <p style="font-size:0.85rem;color:var(--muted);font-family:var(--mono);margin-bottom:1.2rem;">// linux commands</p>
+      <div class="tools-flex">
+        <span class="tool-tag accent">ls / ll</span>
+        <span class="tool-tag accent">cd / pwd</span>
+        <span class="tool-tag accent">chmod / chown</span>
+        <span class="tool-tag accent">ps / top / htop</span>
+        <span class="tool-tag accent">grep / awk / sed</span>
+        <span class="tool-tag accent">find</span>
+        <span class="tool-tag accent">cat / less / tail</span>
+        <span class="tool-tag accent">cp / mv / rm</span>
+        <span class="tool-tag accent">tar / zip / gzip</span>
+        <span class="tool-tag accent">df / du / lsblk</span>
+        <span class="tool-tag accent">uname / whoami</span>
+        <span class="tool-tag accent">ssh / scp</span>
+        <span class="tool-tag accent">apt / dpkg</span>
+        <span class="tool-tag accent">systemctl</span>
+        <span class="tool-tag accent">cron / crontab</span>
+      </div>
+    </div>
+
+    <div style="margin-bottom:2.5rem" class="reveal">
+      <p style="font-size:0.85rem;color:var(--muted);font-family:var(--mono);margin-bottom:1.2rem;">// network testing</p>
+      <div class="tools-flex">
+        <span class="tool-tag">nmap</span>
+        <span class="tool-tag">ping / traceroute</span>
+        <span class="tool-tag">netstat / ss</span>
+        <span class="tool-tag">ifconfig / ip</span>
+        <span class="tool-tag">curl / wget</span>
+        <span class="tool-tag">tcpdump</span>
+        <span class="tool-tag">Wireshark</span>
+        <span class="tool-tag">arp-scan</span>
+        <span class="tool-tag">whois / dig / nslookup</span>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p style="font-size:0.85rem;color:var(--muted);font-family:var(--mono);margin-bottom:1.2rem;">// wi-fi security (lab/educational)</p>
+      <div class="tools-flex">
+        <span class="tool-tag" style="border-color:rgba(255,60,95,0.3);color:#ff6b85">airmon-ng</span>
+        <span class="tool-tag" style="border-color:rgba(255,60,95,0.3);color:#ff6b85">airodump-ng</span>
+        <span class="tool-tag" style="border-color:rgba(255,60,95,0.3);color:#ff6b85">aireplay-ng</span>
+        <span class="tool-tag" style="border-color:rgba(255,60,95,0.3);color:#ff6b85">aircrack-ng</span>
+        <span class="tool-tag" style="border-color:rgba(255,60,95,0.3);color:#ff6b85">Kali Linux</span>
+        <span class="tool-tag" style="border-color:rgba(255,60,95,0.3);color:#ff6b85">iwconfig / iw</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB REPOS -->
+<section id="repos">
+  <div class="wrapper">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">04 — github</div>
+      <h2 class="section-title">Repositories</h2>
+    </div>
+    <div class="repos-status reveal" id="repos-status">
+      <span class="repo-loading"><span class="cursor"></span> fetching repos from GitHub...</span>
+    </div>
+    <div class="repos-grid reveal" id="repos-grid"></div>
+  </div>
+</section>
+
+<!-- GOAL -->
+<section id="goal">
+  <div class="wrapper">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">05 — future</div>
+      <h2 class="section-title">Where I'm headed</h2>
+    </div>
+    <div class="goal-card reveal">
+      <div class="goal-title">Web <span>Penetration</span> Tester</div>
+      <p class="goal-body">
+        My goal is to become a professional web penetration tester — someone who legally
+        breaks into web applications to find vulnerabilities before the bad guys do.
+        I'm building my foundation now: programming logic in Python &amp; C, web technology from
+        the front-end side, network fundamentals, and hands-on Linux security practice.
+        Every tool I learn today is part of the path to OWASP, Burp Suite, CTFs, and eventually
+        bug bounty programs.
+      </p>
+      <div class="roadmap">
+        <div class="roadmap-step">
+          <div class="roadmap-dot done"></div>
+          <div class="roadmap-label"><strong>Foundation</strong>Python · C · Linux · Bash</div>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot done"></div>
+          <div class="roadmap-label"><strong>Web Tech</strong>HTML · CSS · JS</div>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot done"></div>
+          <div class="roadmap-label"><strong>Networks</strong>nmap · tcpdump · Wi-Fi testing</div>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot active"></div>
+          <div class="roadmap-label"><strong>Web Security</strong>OWASP · Burp Suite · CTFs</div>
+        </div>
+        <div class="roadmap-step">
+          <div class="roadmap-dot next"></div>
+          <div class="roadmap-label"><strong>Pro Pentester</strong>Bug bounty · Certifications</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrapper">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">06 — contact</div>
+      <h2 class="section-title">Get in touch</h2>
+    </div>
+    <div class="reveal">
+      <p style="color:var(--muted);max-width:500px;line-height:1.8;">
+        I'm always open to connecting with fellow learners, mentors, or anyone working in
+        cybersecurity. Let's talk.
+      </p>
+      <div class="contact-line">
+        <span style="font-family:var(--mono);font-size:0.8rem;color:var(--muted)">&gt;</span>
+        <a href="mailto:dinesh@example.com">dinesh.cyber25@gmail.com</a>
+      </div>
+      <div class="contact-line">
+        <span style="font-family:var(--mono);font-size:0.8rem;color:var(--muted)">&gt;</span>
+        <a href="https://github.com/navyaXdev" target="_blank">https://github.com/navyaXdev</a>
+      </div>
+      <div class="contact-line">
+        <span style="font-family:var(--mono);font-size:0.8rem;color:var(--muted)">&gt;</span>
+        <a href="https://www.linkedin.com/in/dinesh-patra-56a505413" target="_blank">linkedin.com/in/dineshpatra</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Dinesh Patra &nbsp;·&nbsp; Built with curiosity &amp; caffeine &nbsp;·&nbsp; <span style="color:var(--acid)">~/keep_hacking</span></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
