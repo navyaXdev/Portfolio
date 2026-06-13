@@ -100,29 +100,29 @@ nav {
 .nav-links a {
   font-family: var(--mono);
   font-size: 0.78rem;
-  color: #ffffff;
+  color: var(--acid);
   text-decoration: none;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: color 0.25s, text-shadow 0.25s;
   position: relative;
   padding-bottom: 3px;
-  text-shadow: 0 0 8px rgba(255,255,255,0.7), 0 0 20px rgba(255,255,255,0.3);
+  text-shadow: 0 0 8px rgba(0,245,160,0.7), 0 0 20px rgba(0,245,160,0.3);
 }
 .nav-links a::after {
   content: '';
   position: absolute;
   bottom: -2px; left: 0; right: 0;
   height: 1px;
-  background: var(--acid);
-  box-shadow: 0 0 6px var(--acid), 0 0 12px rgba(0,245,160,0.5);
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(255,255,255,0.8), 0 0 12px rgba(255,255,255,0.4);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
 }
 .nav-links a:hover {
-  color: var(--acid);
-  text-shadow: 0 0 8px rgba(0,245,160,0.9), 0 0 20px rgba(0,245,160,0.4);
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.9), 0 0 22px rgba(255,255,255,0.4);
 }
 .nav-links a:hover::after { transform: scaleX(1); }
 
