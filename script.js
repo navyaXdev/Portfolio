@@ -1,3 +1,53 @@
+// ── CURSOR TRAIL ──
+(function() {
+  const trail = document.getElementById('cur-trail');
+  const ring  = document.getElementById('cur-ring');
+  if (!trail || !ring) return;
+
+  let mx = -100, my = -100;
+  let tx = -100, ty = -100;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    trail.style.left = mx + 'px';
+    trail.style.top  = my + 'px';
+  });
+
+  (function lerp() {
+    tx += (mx - tx) * 0.18;
+    ty += (my - ty) * 0.18;
+    ring.style.left = tx + 'px';
+    ring.style.top  = ty + 'px';
+    requestAnimationFrame(lerp);
+  })();
+
+  document.querySelectorAll('a,button,.btn,.skill-card,.repo-card,.tool-tag').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width  = '44px';
+      ring.style.height = '44px';
+      ring.style.borderColor = 'rgba(0,245,160,0.9)';
+      trail.style.transform = 'translate(-50%,-50%) scale(1.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width  = '28px';
+      ring.style.height = '28px';
+      ring.style.borderColor = 'rgba(0,245,160,0.55)';
+      trail.style.transform = 'translate(-50%,-50%) scale(1)';
+    });
+  });
+
+  document.addEventListener('mousedown', () => {
+    ring.style.width  = '18px';
+    ring.style.height = '18px';
+    ring.style.borderColor = '#fff';
+  });
+  document.addEventListener('mouseup', () => {
+    ring.style.width  = '28px';
+    ring.style.height = '28px';
+    ring.style.borderColor = 'rgba(0,245,160,0.55)';
+  });
+})();
+
 (function() {
   const canvas = document.getElementById('matrix-bg');
   const ctx = canvas.getContext('2d');
