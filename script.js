@@ -4,8 +4,7 @@
   const ring  = document.getElementById('cur-ring');
   if (!trail || !ring) return;
 
-  let mx = -100, my = -100;
-  let tx = -100, ty = -100;
+  let mx = -200, my = -200, tx = -200, ty = -200;
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
@@ -37,8 +36,8 @@
   });
 
   document.addEventListener('mousedown', () => {
-    ring.style.width  = '18px';
-    ring.style.height = '18px';
+    ring.style.width  = '16px';
+    ring.style.height = '16px';
     ring.style.borderColor = '#fff';
   });
   document.addEventListener('mouseup', () => {
@@ -48,6 +47,7 @@
   });
 })();
 
+// ── MATRIX RAIN ──
 (function() {
   const canvas = document.getElementById('matrix-bg');
   const ctx = canvas.getContext('2d');
@@ -107,29 +107,45 @@
     }
     body.appendChild(el);
     requestAnimationFrame(() => el.classList.add('show'));
-    const delay = l.type === 'prompt' ? 700 : 300;
-    setTimeout(next, delay);
+    setTimeout(next, l.type === 'prompt' ? 700 : 300);
   }
   setTimeout(next, 1200);
 })();
 
-// ── INTERSECTION OBSERVER: reveal ──
+// ── SKILLS CARD STAGGER REVEAL ──
+(function() {
+  const cards = document.querySelectorAll('.skill-card');
+  const skillsIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const card = entry.target;
+        const idx  = Array.from(cards).indexOf(card);
+        setTimeout(() => {
+          card.classList.add('card-visible');
+          // animate skill bar after card appears
+          const fill = card.querySelector('.skill-fill');
+          if (fill) fill.style.width = fill.dataset.w + '%';
+        }, idx * 100); // 100ms stagger per card
+        skillsIo.unobserve(card);
+      }
+    });
+  }, { threshold: 0.15 });
+  cards.forEach(c => skillsIo.observe(c));
+})();
+
+// ── GENERAL REVEAL ──
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('visible');
-      // animate skill bars
-      e.target.querySelectorAll('.skill-fill').forEach(f => {
-        f.style.width = f.dataset.w + '%';
-      });
       io.unobserve(e.target);
     }
   });
 }, { threshold: 0.15 });
 revealEls.forEach(el => io.observe(el));
 
-// ── COUNT-UP NUMBERS ──
+// ── COUNT-UP ──
 function countUp(el, target, dur) {
   let start = 0, step = target / (dur / 16);
   const tick = () => {
@@ -149,27 +165,28 @@ const statIo = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.3 });
+document.querySelectorAll('.stat-row').forEach(el => statIo.observe(el));
 
 // ── GITHUB REPOS ──
 (function() {
   const GITHUB_USERNAME = 'navyaXdev';
-  const grid = document.getElementById('repos-grid');
+  const grid   = document.getElementById('repos-grid');
   const status = document.getElementById('repos-status');
 
   const langColors = {
-    Python: '#3572A5', JavaScript: '#f1e05a', C: '#555555',
-    HTML: '#e34c26', CSS: '#563d7c', Shell: '#89e051',
-    'C++': '#f34b7d', Java: '#b07219', TypeScript: '#2b7489',
-    Go: '#00ADD8', Rust: '#dea584', Ruby: '#701516'
+    Python:'#3572A5', JavaScript:'#f1e05a', C:'#555555',
+    HTML:'#e34c26', CSS:'#563d7c', Shell:'#89e051',
+    'C++':'#f34b7d', Java:'#b07219', TypeScript:'#2b7489',
+    Go:'#00ADD8', Rust:'#dea584', Ruby:'#701516'
   };
 
-  function timeAgo(dateStr) {
-    const diff = Date.now() - new Date(dateStr);
-    const d = Math.floor(diff / 86400000);
-    if (d === 0) return 'today';
-    if (d === 1) return '1 day ago';
-    if (d < 30) return d + ' days ago';
-    const m = Math.floor(d / 30);
+  function timeAgo(d) {
+    const diff = Date.now() - new Date(d);
+    const days = Math.floor(diff / 86400000);
+    if (days === 0) return 'today';
+    if (days === 1) return '1 day ago';
+    if (days < 30) return days + ' days ago';
+    const m = Math.floor(days / 30);
     if (m < 12) return m + ' month' + (m > 1 ? 's' : '') + ' ago';
     const y = Math.floor(m / 12);
     return y + ' year' + (y > 1 ? 's' : '') + ' ago';
@@ -185,13 +202,8 @@ const statIo = new IntersectionObserver((entries) => {
     repos.forEach((repo, idx) => {
       const card = document.createElement('div');
       card.className = 'repo-card reveal';
-      card.style.animationDelay = (idx * 0.07) + 's';
-
       const lang = repo.language || '';
-      const dot = lang
-        ? `<span class="repo-lang-dot" style="background:${langColors[lang] || '#888'}"></span><span class="repo-lang">${lang}</span>`
-        : '';
-
+      const dot  = lang ? `<span class="repo-lang-dot" style="background:${langColors[lang]||'#888'}"></span><span class="repo-lang">${lang}</span>` : '';
       card.innerHTML = `
         <div class="repo-top">
           <a class="repo-name" href="${repo.html_url}" target="_blank" rel="noopener">
@@ -213,10 +225,9 @@ const statIo = new IntersectionObserver((entries) => {
             ${repo.forks_count}
           </span>
           <span class="repo-updated">${timeAgo(repo.updated_at)}</span>
-        </div>
-      `;
+        </div>`;
       grid.appendChild(card);
-      requestAnimationFrame(() => setTimeout(() => card.classList.add('visible'), idx * 70));
+      setTimeout(() => card.classList.add('visible'), idx * 70);
     });
   }
 
