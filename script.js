@@ -45,6 +45,16 @@
     ring.style.height = '28px';
     ring.style.borderColor = 'rgba(0,245,160,0.55)';
   });
+
+  // Smooth hide when cursor exits window, show when it enters
+  document.addEventListener('mouseleave', () => {
+    trail.style.opacity = '0';
+    ring.style.opacity  = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    trail.style.opacity = '1';
+    ring.style.opacity  = '1';
+  });
 })();
 
 // ── MATRIX RAIN ──
@@ -78,38 +88,71 @@
   setInterval(draw, 50);
 })();
 
-// ── TERMINAL TYPEWRITER ──
+// ── TERMINAL TYPEWRITER — char-by-char, fast & smooth ──
 (function() {
   const lines = [
-    { type: 'prompt', text: 'whoami' },
+    { type: 'prompt', cmd: 'whoami' },
     { type: 'output', text: 'dinesh_patra', cls: 'ok' },
-    { type: 'prompt', text: 'nmap -sV 192.168.1.1' },
-    { type: 'output', text: 'PORT   STATE SERVICE', cls: '' },
-    { type: 'output', text: '22/tcp open  ssh', cls: 'hi' },
-    { type: 'output', text: '80/tcp open  http', cls: 'hi' },
-    { type: 'prompt', text: 'airmon-ng start wlan0' },
+    { type: 'prompt', cmd: 'nmap -sV 192.168.1.1' },
+    { type: 'output', text: 'PORT   STATE  SERVICE', cls: '' },
+    { type: 'output', text: '22/tcp  open   ssh', cls: 'hi' },
+    { type: 'output', text: '80/tcp  open   http', cls: 'hi' },
+    { type: 'prompt', cmd: 'airmon-ng start wlan0' },
     { type: 'output', text: '[+] monitor mode: wlan0mon', cls: 'ok' },
     { type: 'cursor' }
   ];
+
   const body = document.getElementById('terminal-body');
-  let i = 0;
-  function next() {
-    if (i >= lines.length) return;
-    const l = lines[i++];
-    const el = document.createElement('span');
-    el.classList.add('term-line');
-    if (l.type === 'prompt') {
-      el.innerHTML = `<span class="prompt">dinesh@kali:~$ </span><span class="cmd">${l.text}</span>`;
-    } else if (l.type === 'cursor') {
-      el.innerHTML = `<span class="prompt">dinesh@kali:~$ </span><span class="cursor"></span>`;
-    } else {
-      el.innerHTML = `<span class="output ${l.cls || ''}">${l.text}</span>`;
-    }
-    body.appendChild(el);
-    requestAnimationFrame(() => el.classList.add('show'));
-    setTimeout(next, l.type === 'prompt' ? 700 : 300);
+  let lineIdx = 0;
+
+  function typeChar(el, fullText, charIdx, done) {
+    if (charIdx >= fullText.length) { done && done(); return; }
+    el.textContent += fullText[charIdx];
+    // fast typing: 28ms base, slight randomness for realism
+    setTimeout(() => typeChar(el, fullText, charIdx + 1, done), 22 + Math.random() * 18);
   }
-  setTimeout(next, 1200);
+
+  function showLine() {
+    if (lineIdx >= lines.length) return;
+    const l = lines[lineIdx++];
+    const row = document.createElement('span');
+    row.className = 'term-line';
+    body.appendChild(row);
+
+    requestAnimationFrame(() => {
+      row.classList.add('show');
+
+      if (l.type === 'cursor') {
+        row.innerHTML = `<span class="prompt">dinesh@kali:~$ </span><span class="cursor"></span>`;
+        return;
+      }
+
+      if (l.type === 'output') {
+        row.innerHTML = `<span class="output ${l.cls || ''}">${l.text}</span>`;
+        // output lines appear instantly, next line after short pause
+        setTimeout(showLine, 120);
+        return;
+      }
+
+      // prompt line — type command char by char
+      const promptSpan = document.createElement('span');
+      promptSpan.className = 'prompt';
+      promptSpan.textContent = 'dinesh@kali:~$ ';
+      row.appendChild(promptSpan);
+
+      const cmdSpan = document.createElement('span');
+      cmdSpan.className = 'cmd';
+      row.appendChild(cmdSpan);
+
+      typeChar(cmdSpan, l.cmd, 0, () => {
+        // after typing command, show output after brief pause
+        setTimeout(showLine, 180);
+      });
+    });
+  }
+
+  // Start immediately — no long delay
+  setTimeout(showLine, 400);
 })();
 
 // ── SKILLS CARD STAGGER REVEAL ──
