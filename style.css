@@ -126,6 +126,29 @@ nav {
 }
 .nav-links a:hover::after { transform: scaleX(1); }
 
+/* ── ACTIVE NAV SECTION ── */
+.nav-links a.nav-active {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.9), 0 0 22px rgba(255,255,255,0.5);
+  animation: nav-flicker 2.5s ease-in-out infinite;
+}
+.nav-links a.nav-active::after {
+  transform: scaleX(1);
+  background: var(--acid);
+  box-shadow: 0 0 6px rgba(0,245,160,0.9), 0 0 14px rgba(0,245,160,0.5);
+  animation: nav-bar-pulse 2.5s ease-in-out infinite;
+}
+@keyframes nav-flicker {
+  0%,100% { opacity: 1; text-shadow: 0 0 8px rgba(255,255,255,0.9), 0 0 22px rgba(255,255,255,0.5); }
+  45%      { opacity: 1; text-shadow: 0 0 12px rgba(0,245,160,1),   0 0 30px rgba(0,245,160,0.6); }
+  50%      { opacity: 0.85; }
+  55%      { opacity: 1; }
+}
+@keyframes nav-bar-pulse {
+  0%,100% { box-shadow: 0 0 6px rgba(0,245,160,0.9), 0 0 14px rgba(0,245,160,0.5); }
+  50%     { box-shadow: 0 0 12px rgba(0,245,160,1),  0 0 28px rgba(0,245,160,0.8); }
+}
+
 
 
 /* ── WRAPPER ── */

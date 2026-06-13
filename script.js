@@ -1,3 +1,37 @@
+// ── NAV SCROLL SPY ──
+(function() {
+  const sections = ['about','skills','tools','repos','goal','contact'];
+  const navLinks = {};
+  sections.forEach(id => {
+    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+    if (link) navLinks[id] = link;
+  });
+
+  function getActive() {
+    const scrollY = window.scrollY + window.innerHeight * 0.35;
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollY) current = id;
+    });
+    return current;
+  }
+
+  let lastActive = '';
+  function update() {
+    const active = getActive();
+    if (active === lastActive) return;
+    lastActive = active;
+    Object.entries(navLinks).forEach(([id, link]) => {
+      if (id === active) link.classList.add('nav-active');
+      else link.classList.remove('nav-active');
+    });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
 // ── CURSOR TRAIL ──
 (function() {
   const trail = document.getElementById('cur-trail');
