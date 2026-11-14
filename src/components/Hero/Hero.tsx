@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, Github, Linkedin, Mail, ChevronDown, MapPin, Compass, ShieldCheck } from 'lucide-react';
 import { Button } from '../UI/Button';
 import { Badge } from '../UI/Badge';
@@ -8,6 +8,50 @@ import dineshPortrait from '../../assets/dinesh-patra.jpg';
 import { EASINGS, DURATIONS } from '../../utils/motion';
 
 export const Hero: React.FC = () => {
+  // =========================================================================
+  // SUBTLE 3D MOUSE-HOVER TILT & DYNAMIC GLARE SPECULAR INTERACTION
+  // Strictly isolated to Dinesh's Desktop Portrait Card (Zero effect on network)
+  // =========================================================================
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const isHovered = useMotionValue(0);
+
+  // Buttery-smooth spring physics: rapid response with natural damping, 0 jitter
+  const springConfig = { stiffness: 140, damping: 20, mass: 0.6 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6.5, -6.5]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6.5, 6.5]), springConfig);
+  const glareOpacity = useSpring(isHovered, { stiffness: 180, damping: 22 });
+
+  // Dynamic specular lighting reflection that follows pointer
+  const glareBackground = useTransform([mouseX, mouseY], ([mx, my]) => {
+    const x = ((mx as number) + 0.5) * 100;
+    const y = ((my as number) + 0.5) * 100;
+    return `radial-gradient(circle 340px at ${x}% ${y}%, rgba(0, 245, 160, 0.16) 0%, rgba(6, 182, 212, 0.08) 35%, transparent 75%)`;
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Disable on touch devices or reduced-motion preference
+    if (
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+    isHovered.set(1);
+  };
+
+  const handleMouseLeave = () => {
+    // Smoothly returns to natural equilibrium
+    mouseX.set(0);
+    mouseY.set(0);
+    isHovered.set(0);
+  };
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -249,24 +293,44 @@ export const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Prominent Luxury Portrait with Cinematic Mask Reveal (Desktop lg+) */}
+          {/* Right Column: Prominent Luxury Portrait with Subtle 3D Tilt Parallax (Desktop lg+) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: DURATIONS.cinematic, delay: 0.2, ease: EASINGS.luxuryDecel }}
-            className="hidden lg:flex lg:col-span-5 w-full justify-end"
+            className="hidden lg:flex lg:col-span-5 w-full justify-end [perspective:1200px]"
           >
-            <div className="relative group max-w-sm sm:max-w-md w-full cursor-default select-none">
+            <motion.div
+              id="hero-portrait-card"
+              data-hero-tilt-card="true"
+              style={{
+                rotateX,
+                rotateY,
+                transformStyle: 'preserve-3d',
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              className="relative group max-w-sm sm:max-w-md w-full cursor-default select-none"
+            >
               {/* Subtle ambient lighting aura behind portrait */}
-              <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-glow/20 via-transparent to-cyan-500/15 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none" />
+              <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-glow/20 via-transparent to-cyan-500/15 rounded-3xl blur-2xl opacity-40 group-hover:opacity-75 transition-opacity duration-700 pointer-events-none" />
 
               {/* Main Portrait Card Container with Cinematic Mask Reveal */}
               <motion.div
                 initial={{ clipPath: 'inset(10% 0% 0% 0%)', opacity: 0 }}
                 animate={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 }}
                 transition={{ duration: DURATIONS.long, delay: 0.25, ease: EASINGS.luxuryDecel }}
-                className="relative rounded-3xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:border-emerald-glow/35 group-hover:shadow-[0_25px_70px_-10px_rgba(0,0,0,0.95)]"
+                className="relative rounded-3xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:border-emerald-glow/40 group-hover:shadow-[0_25px_70px_-10px_rgba(0,0,0,0.95),0_0_30px_rgba(0,245,160,0.12)]"
               >
+                {/* Dynamic Specular Sheen / Pointer-Following Light Reflection */}
+                <motion.div
+                  style={{
+                    opacity: glareOpacity,
+                    background: glareBackground,
+                  }}
+                  className="absolute inset-0 z-20 pointer-events-none transition-opacity duration-300"
+                />
+
                 {/* Natural 1:1 aspect ratio container for authentic full-resolution rendering */}
                 <div className="relative aspect-square w-full overflow-hidden bg-void-950">
                   <img
@@ -275,11 +339,11 @@ export const Hero: React.FC = () => {
                     className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-102"
                     loading="eager"
                   />
-                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-void-950/80 to-transparent pointer-events-none" />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-void-950/80 to-transparent pointer-events-none z-10" />
                 </div>
 
                 {/* Bottom Card Identity Strip */}
-                <div className="p-5 bg-void-900/95 backdrop-blur-md border-t border-white/5 flex items-center justify-between">
+                <div className="p-5 bg-void-900/95 backdrop-blur-md border-t border-white/5 flex items-center justify-between relative z-10">
                   <div>
                     <div className="text-base font-display font-bold text-white tracking-wide">
                       Dinesh Patra
@@ -294,7 +358,7 @@ export const Hero: React.FC = () => {
                   </div>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
