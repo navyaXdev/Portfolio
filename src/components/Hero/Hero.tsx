@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, Github, Linkedin, Mail, ChevronDown, MapPin, Compass, ShieldCheck } from 'lucide-react';
 import { Button } from '../UI/Button';
 import { Badge } from '../UI/Badge';
@@ -7,29 +7,6 @@ import { profileData } from '../../data/profile';
 import dineshPortrait from '../../assets/dinesh-patra.jpg';
 
 export const Hero: React.FC = () => {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  // Subtle interactive 3D parallax on portrait card
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), { stiffness: 120, damping: 20 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), { stiffness: 120, damping: 20 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -42,7 +19,7 @@ export const Hero: React.FC = () => {
     }
   };
 
-  // Cinematic staggered text container
+  // Cinematic Staggered Sequences
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -55,7 +32,7 @@ export const Hero: React.FC = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, y: 22 },
     visible: {
       opacity: 1,
       y: 0,
@@ -63,8 +40,18 @@ export const Hero: React.FC = () => {
     }
   };
 
+  const titleWords = ['Cybersecurity', 'Enthusiast', '•', 'Developer', '•', 'Technology', 'Explorer'];
+
   return (
     <section id="hero" className="relative min-h-[92vh] flex items-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden scroll-mt-24">
+      {/* Soft ambient lighting spot */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+        className="absolute top-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-emerald-500/[0.04] blur-[140px] pointer-events-none"
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
@@ -76,7 +63,7 @@ export const Hero: React.FC = () => {
             className="lg:col-span-7 flex flex-col items-start text-left"
           >
             {/* Status & Availability Badge */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 mb-4 sm:mb-6">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 mb-4 sm:mb-5">
               <Badge variant="emerald" pulseDot size="sm">
                 OPEN TO WORK &amp; INTERNSHIPS
               </Badge>
@@ -86,25 +73,56 @@ export const Hero: React.FC = () => {
               </span>
             </motion.div>
 
-            {/* Name Heading with Editorial Typography */}
-            <motion.h1 variants={itemVariants} className="text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-display font-extrabold text-white tracking-tight leading-[1.08] mb-3 sm:mb-4">
-              DINESH{' '}
-              <span className="gradient-emerald inline-block">
-                PATRA
+            {/* Name Heading with Word-by-Word Masked Cinematic Reveal */}
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-display font-extrabold text-white tracking-tight leading-[1.08] mb-3 sm:mb-4 flex flex-wrap items-center gap-x-3.5"
+            >
+              <span className="inline-block overflow-hidden py-0.5">
+                <motion.span
+                  initial={{ y: '115%', opacity: 0 }}
+                  animate={{ y: '0%', opacity: 1 }}
+                  transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block"
+                >
+                  DINESH
+                </motion.span>
+              </span>
+              <span className="inline-block overflow-hidden py-0.5">
+                <motion.span
+                  initial={{ y: '115%', opacity: 0 }}
+                  animate={{ y: '0%', opacity: 1 }}
+                  transition={{ duration: 0.85, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  className="gradient-emerald inline-block"
+                >
+                  PATRA
+                </motion.span>
               </span>
             </motion.h1>
 
-            {/* Professional Positioning Roles */}
+            {/* Expanding Hairline Luminous Accent Line */}
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              style={{ originX: 0 }}
+              className="h-[2px] w-28 bg-gradient-to-r from-emerald-glow via-cyan-400 to-transparent rounded-full shadow-[0_0_12px_rgba(0,245,160,0.5)] mb-4"
+            />
+
+            {/* Staggered Professional Positioning Words */}
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2 text-xs sm:text-sm md:text-base font-mono text-emerald-glow tracking-wider mb-4 sm:mb-5">
-              <span>Cybersecurity Enthusiast</span>
-              <span className="text-white/20">•</span>
-              <span>Developer</span>
-              <span className="text-white/20">•</span>
-              <span>Technology Explorer</span>
+              {titleWords.map((word, idx) => (
+                <span key={idx} className={word === '•' ? 'text-white/20' : ''}>
+                  {word}
+                </span>
+              ))}
             </motion.div>
 
-            {/* Prominent Mobile Portrait Card (Visible on mobile/tablet < lg, hidden on desktop lg+) */}
-            <motion.div variants={itemVariants} className="block lg:hidden w-full max-w-[270px] sm:max-w-[320px] mx-auto my-6">
+            {/* Mobile Portrait Card (Visible on mobile screens < lg, hidden on desktop lg+) */}
+            <motion.div
+              variants={itemVariants}
+              className="block lg:hidden w-full max-w-[270px] sm:max-w-[300px] mx-auto my-5"
+            >
               <div className="relative rounded-2xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_12px_36px_-10px_rgba(0,0,0,0.85)]">
                 <div className="relative aspect-square w-full overflow-hidden bg-void-950">
                   <img
@@ -113,13 +131,14 @@ export const Hero: React.FC = () => {
                     className="w-full h-full object-cover object-center"
                     loading="eager"
                   />
+                  <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-void-950/80 to-transparent pointer-events-none" />
                 </div>
-                <div className="p-3.5 sm:p-4 bg-void-900/95 border-t border-white/5 flex items-center justify-between">
+                <div className="p-3.5 bg-void-900/95 border-t border-white/5 flex items-center justify-between">
                   <div>
                     <div className="text-sm font-display font-bold text-white">Dinesh Patra</div>
                     <div className="text-[11px] font-mono text-emerald-glow mt-0.5">B.Sc. First-Year Student</div>
                   </div>
-                  <div className="flex items-center gap-1 text-[11px] font-mono text-cyber-silver bg-void-950 px-2.5 py-1 rounded-full border border-white/5">
+                  <div className="flex items-center gap-1 text-[11px] font-mono text-cyber-silver bg-void-950 px-2.5 py-1 rounded-full border border-white/10 shadow-sm">
                     <ShieldCheck className="w-3 h-3 text-emerald-glow" />
                     <span>Verified</span>
                   </div>
@@ -137,7 +156,7 @@ export const Hero: React.FC = () => {
               First-year B.Sc. student grounding computer science theory in practical systems engineering, Linux environments, and hands-on web application security.
             </motion.p>
 
-            {/* Three Distinct High-Impact CTA Buttons */}
+            {/* Three High-Impact CTA Buttons */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8 w-full sm:w-auto">
               <Button
                 variant="primary"
@@ -172,7 +191,7 @@ export const Hero: React.FC = () => {
               </Button>
             </motion.div>
 
-            {/* Verified Direct Links */}
+            {/* Verified Direct Links with Staggered Entrance */}
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 sm:gap-6 pt-5 border-t border-white/5 w-full">
               <span className="font-mono text-xs text-cyber-muted uppercase tracking-wider hidden sm:inline">
                 Direct Profiles:
@@ -211,26 +230,25 @@ export const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Large Luxury Portrait Framing with 3D Tilt (Desktop only) */}
+          {/* Right Column: Prominent Luxury Portrait with Cinematic Mask Reveal (Desktop lg+) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.85, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden lg:flex lg:col-span-5 w-full justify-end [perspective:1200px]"
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="hidden lg:flex lg:col-span-5 w-full justify-end"
           >
-            <motion.div
-              ref={cardRef}
-              style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              className="relative group max-w-sm sm:max-w-md w-full cursor-default select-none"
-            >
+            <div className="relative group max-w-sm sm:max-w-md w-full cursor-default select-none">
               {/* Subtle ambient lighting behind portrait */}
               <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-glow/20 via-transparent to-cyan-500/10 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none" />
 
-              {/* Main Portrait Card Container */}
-              <div className="relative rounded-3xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85)] transition-shadow duration-500 group-hover:shadow-[0_25px_70px_-10px_rgba(0,0,0,0.95)]">
-                {/* Natural 1:1 aspect ratio container for full-resolution rendering */}
+              {/* Main Portrait Card Container with Cinematic Mask Reveal */}
+              <motion.div
+                initial={{ clipPath: 'inset(10% 0% 0% 0%)', opacity: 0 }}
+                animate={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 }}
+                transition={{ duration: 1.0, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="relative rounded-3xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:border-emerald-glow/30 group-hover:shadow-[0_25px_70px_-10px_rgba(0,0,0,0.95)]"
+              >
+                {/* Natural 1:1 aspect ratio container for authentic full-resolution rendering */}
                 <div className="relative aspect-square w-full overflow-hidden bg-void-950">
                   <img
                     src={dineshPortrait}
@@ -238,25 +256,26 @@ export const Hero: React.FC = () => {
                     className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-102"
                     loading="eager"
                   />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-void-950/80 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Bottom Card Identity Strip */}
-                <div className="p-5 bg-void-900/90 backdrop-blur-md border-t border-white/5 flex items-center justify-between">
+                <div className="p-5 bg-void-900/95 backdrop-blur-md border-t border-white/5 flex items-center justify-between">
                   <div>
-                    <div className="text-base font-display font-bold text-white">
+                    <div className="text-base font-display font-bold text-white tracking-wide">
                       Dinesh Patra
                     </div>
                     <div className="text-xs font-mono text-emerald-glow/90 mt-0.5">
                       B.Sc. First-Year Student
                     </div>
                   </div>
-                  <div className="flex items-center gap-1.5 text-xs font-mono text-cyber-silver bg-void-950 px-3 py-1.5 rounded-full border border-white/5">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-cyber-silver bg-void-950 px-3 py-1.5 rounded-full border border-white/10 shadow-sm">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-glow" />
-                    <span>Verified</span>
+                    <span>Verified Identity</span>
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
 

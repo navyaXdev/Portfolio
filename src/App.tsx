@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { Preloader } from './components/Preloader/Preloader';
 import { CustomCursor } from './components/CustomCursor/CustomCursor';
+import { Floating3DBackground } from './components/Three/Floating3DBackground';
 import { AmbientBackground } from './components/UI/AmbientBackground';
 import { Navbar } from './components/Navbar/Navbar';
 import { Hero } from './components/Hero/Hero';
@@ -24,7 +25,10 @@ export const App: React.FC = () => {
         {/* Luxury Custom Cursor (desktop only, disabled on touch/reduced motion) */}
         <CustomCursor />
 
-        {/* Ambient background particles & glows */}
+        {/* Section-Aware Floating 3D Background Engine */}
+        <Floating3DBackground />
+
+        {/* Ambient atmospheric lighting & grid */}
         <AmbientBackground />
 
         {/* Navigation */}

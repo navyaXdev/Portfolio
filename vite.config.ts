@@ -9,12 +9,14 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
+    chunkSizeWarningLimit: 700,
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           motion: ['framer-motion'],
-          icons: ['lucide-react']
+          icons: ['lucide-react'],
+          three: ['three']
         }
       }
     }

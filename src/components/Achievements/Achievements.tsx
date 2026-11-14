@@ -63,29 +63,33 @@ export const Achievements: React.FC = () => {
           {/* 1. Verified Achievement: NYC CodeQuest */}
           {verifiedItem && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
               className="p-6 sm:p-8 md:p-10 rounded-2xl glass-card border border-emerald-glow/20 relative overflow-hidden shadow-[0_0_40px_rgba(0,245,160,0.04)]"
             >
-              {/* Subtle top gradient accent */}
+              {/* Top gradient accent */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-glow via-cyber-cyan to-transparent" />
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
                 
-                {/* Left Preview Column: Certificate Preview (5 cols) */}
+                {/* Left Preview Column: Certificate Preview with Smooth Mask Reveal (5 cols) */}
                 <div className="lg:col-span-5 flex flex-col items-center">
-                  <div 
+                  <motion.div 
+                    initial={{ clipPath: 'inset(10% 0% 0% 0%)', opacity: 0 }}
+                    whileInView={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
                     onClick={() => verifiedItem.image && setSelectedImage(verifiedItem.image)}
-                    className="relative group w-full cursor-pointer rounded-xl overflow-hidden bg-void-950 border border-white/10 hover:border-emerald-glow/50 transition-all shadow-xl aspect-[1.414/1] max-w-md"
+                    className="relative group w-full cursor-pointer rounded-2xl overflow-hidden bg-void-950 border border-white/10 hover:border-emerald-glow/50 transition-all shadow-xl aspect-[1.414/1] max-w-md"
                     title="Click to view full certificate"
                   >
                     {verifiedItem.image && (
                       <img 
                         src={verifiedItem.image} 
                         alt="NYC CodeQuest Certificate of Achievement — Round 3 Qualifier" 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-104"
                         loading="lazy"
                       />
                     )}
@@ -110,7 +114,7 @@ export const Achievements: React.FC = () => {
                         CERTIFIED
                       </span>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Thumbnail footer caption */}
                   <div className="w-full flex items-center justify-between text-[11px] font-mono text-cyber-muted mt-3 max-w-md px-1">
@@ -163,39 +167,40 @@ export const Achievements: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Title & Hackathon Name */}
+                  {/* Title & Organization Hierarchy */}
                   <div>
-                    <div className="flex items-center gap-2 font-mono text-xs text-cyber-muted uppercase tracking-wider mb-1">
+                    <div className="font-mono text-xs text-cyber-silver flex items-center gap-2 mb-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-emerald-glow" />
-                      <span>{verifiedItem.organization}</span>
-                      <span className="text-white/20">·</span>
-                      <span className="text-cyber-silver">Round 3</span>
+                      <span className="uppercase tracking-widest">{verifiedItem.organization}</span>
+                      {verifiedItem.organizerDetail && (
+                        <>
+                          <span className="text-white/20">•</span>
+                          <span>{verifiedItem.organizerDetail}</span>
+                        </>
+                      )}
                     </div>
 
-                    <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white">
-                      {verifiedItem.achievementTitle}
+                    <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white tracking-tight">
+                      {verifiedItem.achievementTitle || verifiedItem.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm font-mono text-emerald-glow mt-1">
-                      Certificate of Achievement · Issued to Dinesh Patra
-                    </p>
+                    <div className="text-sm font-mono text-emerald-glow mt-1">
+                      {verifiedItem.title} · Issued to Dinesh Patra
+                    </div>
                   </div>
 
-                  {/* Official Citation Quote Box */}
+                  {/* Factual Citation Quote */}
                   {verifiedItem.citation && (
-                    <blockquote className="p-4 rounded-xl bg-void-900/80 border-l-2 border-emerald-glow border-y border-r border-white/5 font-body text-xs sm:text-sm text-cyber-silver/90 italic leading-relaxed">
+                    <div className="p-4 rounded-xl bg-void-900/80 border border-white/5 text-xs sm:text-sm text-cyber-silver/90 font-body leading-relaxed italic">
                       "{verifiedItem.citation}"
-                    </blockquote>
+                    </div>
                   )}
 
-                  {/* Organizer & Signatory Meta */}
+                  {/* Authorized Signatory Credential Info */}
                   {verifiedItem.signatory && (
-                    <div className="flex flex-wrap items-center justify-between gap-4 pt-1 text-xs font-mono text-cyber-muted">
-                      <div>
-                        <span className="text-cyber-muted">Authorized Signatory: </span>
-                        <strong className="text-white font-semibold">{verifiedItem.signatory.name}</strong>
-                        <span className="text-white/30"> ({verifiedItem.signatory.role})</span>
-                      </div>
+                    <div className="text-xs font-mono text-cyber-muted">
+                      Authorized Signatory:{' '}
+                      <strong className="text-white font-medium">{verifiedItem.signatory.name}</strong> ({verifiedItem.signatory.role})
                     </div>
                   )}
 
@@ -238,7 +243,7 @@ export const Achievements: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="p-6 sm:p-8 rounded-2xl glass-card border border-white/10 hover:border-cyber-amber/30 transition-all relative overflow-hidden"
             >
-              {/* Subtle top indicator bar */}
+              {/* Top indicator bar */}
               <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyber-amber/40 via-cyber-cyan/30 to-transparent" />
 
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -260,42 +265,36 @@ export const Achievements: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-display font-extrabold text-white">
+                  <h3 className="text-xl sm:text-2xl font-display font-bold text-white">
                     {pendingItem.title}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-sm text-cyber-muted font-body leading-relaxed">
+                  <p className="text-xs sm:text-sm text-cyber-silver/90 font-body leading-relaxed">
                     {pendingItem.description}
                   </p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {pendingItem.tags.map(tag => (
-                      <span 
-                        key={tag}
-                        className="px-2.5 py-1 rounded-md bg-void-900 border border-white/5 text-[11px] font-mono text-cyber-silver"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {pendingItem.tags && (
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {pendingItem.tags.map((tag, i) => (
+                        <span
+                          key={i}
+                          className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-void-950 text-cyber-muted border border-white/5"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {/* Status Callout Box */}
-                <div className="shrink-0 p-5 rounded-xl bg-void-950/80 border border-white/10 flex flex-col items-center justify-center text-center w-full md:w-64">
-                  <div className="p-2.5 rounded-full bg-cyber-amber/10 text-cyber-amber mb-2">
-                    <Clock className="w-5 h-5 animate-pulse" />
-                  </div>
-                  <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                {/* Right side verification notice */}
+                <div className="shrink-0 p-4 rounded-xl bg-void-950/80 border border-white/5 flex flex-col items-center justify-center text-center">
+                  <Clock className="w-5 h-5 text-cyber-amber mb-1.5 animate-pulse" />
+                  <span className="text-xs font-mono font-bold text-cyber-amber uppercase">
                     Evaluation in Progress
                   </span>
-                  <span className="text-[11px] font-mono text-cyber-muted mt-1">
-                    Official announcement pending
-                  </span>
-                  <span className="text-[10px] font-mono text-emerald-glow/80 mt-2 bg-void-900 px-2 py-0.5 rounded border border-white/5">
-                    Records auto-updated on release
+                  <span className="text-[10px] font-mono text-cyber-muted mt-1 max-w-[160px]">
+                    Official announcement pending organizer release
                   </span>
                 </div>
               </div>
@@ -305,75 +304,80 @@ export const Achievements: React.FC = () => {
         </div>
       </div>
 
-      {/* Lightbox / High-Resolution Certificate Modal */}
+      {/* Interactive Lightbox Modal for Certificate Preview */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-void-950/90 backdrop-blur-xl"
             onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-50 bg-void-950/90 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 md:p-8"
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              initial={{ scale: 0.94, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.94, opacity: 0, y: 15 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative max-w-5xl w-full max-h-[92vh] flex flex-col bg-void-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
               onClick={e => e.stopPropagation()}
-              className="relative max-w-4xl w-full max-h-[92vh] flex flex-col bg-void-900 border border-white/15 rounded-2xl overflow-hidden shadow-2xl"
             >
-              {/* Modal Top Bar */}
-              <div className="p-4 bg-void-950 border-b border-white/10 flex items-center justify-between shrink-0">
-                <div className="flex items-center gap-2">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 px-6 border-b border-white/10 bg-void-950/80">
+                <div className="flex items-center gap-2.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-glow" />
-                  <span className="font-mono text-xs font-bold text-white tracking-wider">
-                    NYC CodeQuest Certificate of Achievement
+                  <span className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                    Official Credential Preview
                   </span>
-                  <span className="hidden sm:inline-block text-white/20">|</span>
-                  <code className="hidden sm:inline-block text-[11px] font-mono text-emerald-glow bg-void-900 px-2 py-0.5 rounded">
-                    CERT-2026-MFDX9C
-                  </code>
+                  <span className="text-white/20">|</span>
+                  <span className="font-mono text-xs text-cyber-silver">
+                    {verifiedItem?.credentialId}
+                  </span>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <a
-                    href={selectedImage}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 min-h-[44px] rounded-lg bg-void-900 border border-white/10 text-cyber-silver hover:text-emerald-glow hover:border-emerald-glow/30 transition-all text-xs flex items-center gap-1.5 px-3 font-mono"
-                    title="Open full image in new tab"
-                  >
-                    <span>Full Resolution</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
+                  {verifiedItem?.credentialId && (
+                    <button
+                      onClick={() => handleCopyId(verifiedItem.credentialId!)}
+                      className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-void-900 border border-white/10 text-xs font-mono text-cyber-silver hover:text-white transition-colors"
+                    >
+                      {copiedId === verifiedItem.credentialId ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-glow" />
+                          <span className="text-emerald-glow">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5" />
+                          <span>Copy ID</span>
+                        </>
+                      )}
+                    </button>
+                  )}
 
                   <button
                     onClick={() => setSelectedImage(null)}
-                    className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-void-900 border border-white/10 text-cyber-muted hover:text-white hover:border-white/20 transition-all"
-                    aria-label="Close certificate preview"
+                    className="p-1.5 rounded-lg bg-void-900 border border-white/10 text-cyber-muted hover:text-white hover:border-emerald-glow/40 transition-colors"
+                    aria-label="Close Preview"
                   >
                     <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
 
-              {/* Modal Image Body with natural scrolling if oversized */}
-              <div className="p-4 sm:p-6 overflow-auto flex items-center justify-center bg-void-950/60">
+              {/* Modal Image Viewport */}
+              <div className="p-3 sm:p-6 overflow-auto flex items-center justify-center bg-void-950/50">
                 <img
                   src={selectedImage}
-                  alt="Official NYC CodeQuest Certificate of Achievement for Dinesh Patra"
-                  className="max-h-[75vh] w-auto object-contain rounded-lg shadow-2xl border border-white/5"
+                  alt="Full Resolution Verified Certificate"
+                  className="max-h-[76vh] w-auto object-contain rounded-lg shadow-2xl border border-white/5"
                 />
               </div>
 
-              {/* Modal Bottom Verification Strip */}
-              <div className="p-3 bg-void-950 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-cyber-muted px-6">
-                <span>Signatory: Harsh Vandana Sharma (CEO &amp; Founder)</span>
-                <span className="text-emerald-glow font-semibold flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Officially Verified Credential</span>
-                </span>
+              {/* Modal Footer */}
+              <div className="p-3 px-6 border-t border-white/10 bg-void-950/80 flex items-center justify-between text-xs font-mono text-cyber-muted">
+                <span>Verified by NYC CodeQuest / NYX Hackathon Official Organizers</span>
+                <span className="hidden sm:inline">Press Esc or click backdrop to close</span>
               </div>
             </motion.div>
           </motion.div>

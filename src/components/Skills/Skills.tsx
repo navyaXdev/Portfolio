@@ -25,14 +25,14 @@ export const Skills: React.FC = () => {
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Terminal': return <Terminal className="w-5 h-5 text-emerald-glow" />;
-      case 'Cpu': return <Cpu className="w-5 h-5 text-cyber-cyan" />;
-      case 'Code2': return <Code2 className="w-5 h-5 text-cyber-amber" />;
-      case 'Layout': return <Layout className="w-5 h-5 text-emerald-glow" />;
-      case 'Server': return <Server className="w-5 h-5 text-emerald-glow" />;
-      case 'Network': return <Network className="w-5 h-5 text-cyber-cyan" />;
-      case 'GitBranch': return <GitBranch className="w-5 h-5 text-emerald-glow" />;
-      default: return <Terminal className="w-5 h-5 text-emerald-glow" />;
+      case 'Terminal': return <Terminal className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
+      case 'Cpu': return <Cpu className="w-5 h-5 text-cyber-cyan group-hover:scale-110 transition-transform duration-300" />;
+      case 'Code2': return <Code2 className="w-5 h-5 text-cyber-amber group-hover:scale-110 transition-transform duration-300" />;
+      case 'Layout': return <Layout className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
+      case 'Server': return <Server className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
+      case 'Network': return <Network className="w-5 h-5 text-cyber-cyan group-hover:scale-110 transition-transform duration-300" />;
+      case 'GitBranch': return <GitBranch className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
+      default: return <Terminal className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
     }
   };
 
@@ -43,14 +43,14 @@ export const Skills: React.FC = () => {
           index="02"
           tag="CORE COMPETENCIES"
           title="Technical Fundamentals"
-          subtitle="A focused and genuine overview of the programming languages, systems, and networking foundations I actively study and understand."
+          subtitle="A disciplined and authentic overview of the programming languages, systems, and networking foundations I actively study and understand."
         />
 
         {/* Category Filter Tabs */}
         <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/10">
           <div className="flex items-center gap-1.5 text-xs font-mono text-cyber-muted mr-2">
-            <Filter className="w-3.5 h-3.5" />
-            <span>Filter:</span>
+            <Filter className="w-3.5 h-3.5 text-emerald-glow" />
+            <span>Filter Category:</span>
           </div>
 
           {CATEGORIES.map(category => {
@@ -59,7 +59,7 @@ export const Skills: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`relative px-3.5 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-all select-none min-h-[40px] flex items-center justify-center ${
+                className={`relative px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-all select-none min-h-[42px] flex items-center justify-center ${
                   isActive
                     ? 'text-void-950 font-bold'
                     : 'text-cyber-silver hover:text-white hover:bg-white/5'
@@ -78,29 +78,31 @@ export const Skills: React.FC = () => {
           })}
         </div>
 
-        {/* Skills Cards Grid: Clean 4-col / 2-col layout */}
+        {/* Skills Cards Grid: Clean 4-col / 2-col layout with Staggered Entrance */}
         <motion.div
           layout
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
-          <AnimatePresence>
-            {filteredSkills.map((skill: SkillItem) => (
+          <AnimatePresence mode="popLayout">
+            {filteredSkills.map((skill: SkillItem, index: number) => (
               <motion.div
                 layout
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.25 }}
+                initial={{ opacity: 0, y: 18, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                 key={skill.name}
-                className="p-6 rounded-xl glass-card border border-white/5 hover:border-emerald-glow/30 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                className="relative overflow-hidden p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.85),0_0_20px_-5px_rgba(0,245,160,0.12)]"
               >
+                {/* Subtle Top Gradient Hover Accent */}
+                <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-glow/0 to-transparent group-hover:via-emerald-glow transition-all duration-500" />
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="p-2.5 rounded-lg bg-void-900 border border-white/10 group-hover:border-emerald-glow/30 transition-colors">
+                    <div className="p-2.5 rounded-xl bg-void-900 border border-white/10 group-hover:border-emerald-glow/30 transition-colors">
                       {getIcon(skill.icon)}
                     </div>
-                    <span className="text-[10px] font-mono tracking-wider uppercase px-2 py-0.5 rounded bg-white/5 text-cyber-muted border border-white/5">
-                      {skill.category === 'Programming' ? 'Lang' : 'Sys'}
+                    <span className="text-[10px] font-mono tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-white/5 text-cyber-muted border border-white/5">
+                      {skill.category === 'Programming' ? 'Language' : 'Systems'}
                     </span>
                   </div>
 
