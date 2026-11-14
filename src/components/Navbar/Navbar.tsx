@@ -148,6 +148,8 @@ export const Navbar: React.FC = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 rounded-lg bg-void-900 border border-white/10 text-white hover:text-emerald-glow focus:outline-none"
             aria-label="Toggle navigation menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation-menu"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -157,6 +159,7 @@ export const Navbar: React.FC = () => {
       {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
         <div 
+          id="mobile-navigation-menu"
           className="lg:hidden fixed inset-x-0 top-[60px] bottom-0 bg-void-950/98 backdrop-blur-2xl border-t border-white/10 z-50 flex flex-col justify-between p-6 overflow-y-auto"
           onClick={e => {
             if (e.target === e.currentTarget) setIsMobileMenuOpen(false);

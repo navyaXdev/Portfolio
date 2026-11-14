@@ -319,6 +319,33 @@
   background-color: rgba(0, 0, 0, 0.08) !important;
 }
 
+/* Form Inputs, Code & Quotes in Light Mode */
+.light input,
+.light textarea,
+.light select {
+  background-color: #FFFFFF !important;
+  color: #111827 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #9CA3AF !important;
+}
+.light code {
+  color: #059669 !important;
+  background-color: rgba(5, 150, 105, 0.08) !important;
+}
+.light blockquote {
+  background-color: #F8F9FA !important;
+  color: #374151 !important;
+  border-left-color: #059669 !important;
+}
+
+/* Modal lightbox overlay in Light Mode */
+.light .fixed.inset-0.bg-void-950\/90 {
+  background-color: rgba(15, 23, 42, 0.72) !important;
+}
+
 /* =========================================================
    CUSTOM CURSOR SYSTEM
    ========================================================= */

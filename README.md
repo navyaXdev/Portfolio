@@ -13,10 +13,12 @@
 This project is a complete luxury-grade React architecture rebuild of Dinesh Patra's portfolio. Designed with an editorial aesthetic inspired by high-end cybersecurity telemetry, minimal editorial typography, and interactive canvas environments.
 
 ### Key Highlights
-- **Interactive Terminal Widget**: Live educational diagnostic terminal with auto-typewriter playback and user CLI command execution (`whoami`, `skills`, `repos`, `roadmap`, `help`, `uname -a`, `clear`, `flag`).
-- **Authentic Technical Fundamentals**: Focused strictly on proven competencies: Python, C/C++, HTML & CSS, JavaScript, Linux / Kali Linux, Bash & Shell, Networking Fundamentals, and Git & GitHub.
-- **Central GitHub Project Destination**: Live API synchronization querying `@navyaXdev` public repositories with client-side caching (`sessionStorage`), language filters, search bar, and fallback resilience.
-- **Interconnected Redesigned Roadmap**: Continuous visual spine connecting milestones from foundational systems to professional Web Penetration Testing.
+- **Dual Luxury Themes**: Dark Luxury (obsidian charcoal, emerald glow accents) and Light Luxury (warm architectural ivory, pure white cards, charcoal typography) with an animated Sun/Moon morphing toggle and zero-flash anti-flash initializer.
+- **Editorial Personal Branding**: Authentic high-resolution portrait photograph of Dinesh Patra in the Hero section with desktop interactive 3D parallax tilt (automatically bypassed on touch devices).
+- **Authentic Technical Fundamentals**: Focused strictly on proven competencies: Python, C/C++, HTML & CSS, JavaScript, Linux / Kali Linux, Bash & Shell, Networking Fundamentals, and Git & GitHub. No unlearned technologies or fake percentages.
+- **Central GitHub Project Destination**: Live API telemetry querying `@navyaXdev` public repositories with client-side caching (`sessionStorage`), language filters, search bar, and fallback resilience.
+- **Verified Achievements & Hackathons**: High-resolution interactive lightbox preview for NYC CodeQuest Round 3 Qualifier certificate (`CERT-2026-MFDX9C`) and Smart India Hackathon clearly badged as *Result Awaited*.
+- **Interconnected Redesigned Roadmap**: Continuous visual spine connecting milestones with scroll-linked progress illumination and pulsing halo on active milestones.
 - **Luxury Custom Cursor with Zero Native Cursor Bleed**: Global desktop cursor suppression (`cursor: none !important`), zero-latency GPU-accelerated center dot tracking, fluid lerp outer ring, and touch-device preservation.
 - **Deep Technical SEO**: Open Graph, Twitter Cards, Canonical links, XML sitemap, `robots.txt`, and Schema.org JSON-LD Person & WebSite graphs.
 
@@ -41,36 +43,39 @@ c:\WORKPLACE\Portfolio/
 │   ├── robots.txt               # Search crawler permissions
 │   └── sitemap.xml              # Search engine sitemap
 ├── src/
+│   ├── assets/              # Authentic portrait, certificates & icons
 │   ├── components/
-│   │   ├── About/               # Academic background & engineering pillars
-│   │   ├── Contact/             # Direct copy email, verified profiles & mailto
-│   │   ├── CustomCursor/        # Lerp trailing ring & precision crosshair
-│   │   ├── Experience/          # Learning timeline & NYC CodeQuest 2026
-│   │   ├── Footer/              # Back to top & copyright
-│   │   ├── GitHubActivity/      # Dynamic GitHub API integration & search
-│   │   ├── Hero/                # Editorial typography, portrait & Kali terminal
-│   │   ├── Navbar/              # Glassmorphic navbar with active scroll spy
-│   │   ├── Preloader/           # Boot sequence with system metrics
-│   │   ├── Roadmap/             # Interconnected phased pathway to Web Pentesting
-│   │   ├── Terminal/            # Live interactive CLI emulator
-│   │   ├── Toolkit/             # Categorized Linux, network & lab commands
-│   │   └── UI/                  # Ambient background, buttons, badges, headings
+│   │   ├── About/           # Academic background & engineering pillars
+│   │   ├── Achievements/    # NYC CodeQuest certificate lightbox & SIH Result Awaited
+│   │   ├── Contact/         # Direct copy email, verified profiles & mailto
+│   │   ├── CustomCursor/    # Lerp trailing ring & precision crosshair
+│   │   ├── Experience/      # Learning timeline & NYC CodeQuest 2026
+│   │   ├── Footer/          # Back to top & copyright
+│   │   ├── GitHubActivity/  # Dynamic GitHub API integration & search
+│   │   ├── Hero/            # Editorial typography, portrait & 3D tilt
+│   │   ├── Navbar/          # Sliding active pill, Sun/Moon theme toggle & drawer
+│   │   ├── Preloader/       # Boot sequence with system metrics
+│   │   ├── Roadmap/         # Interconnected phased pathway with scroll-linked spine
+│   │   ├── Skills/          # Category filter with sliding pill
+│   │   └── UI/              # Ambient background, buttons, badges, headings
+│   ├── context/
+│   │   └── ThemeContext.tsx # Dual theme management (dark/light)
 │   ├── data/
-│   │   ├── profile.ts           # Verified identity, stats & bio
-│   │   ├── roadmap.ts           # Phased milestones
-│   │   ├── skills.ts            # Authentically retained engineering fundamentals
-│   │   ├── timeline.ts          # Hackathons & learning history
-│   │   └── toolkit.ts           # Linux & networking commands
+│   │   ├── achievements.ts  # Verified hackathons & credentials
+│   │   ├── profile.ts       # Verified identity, stats & bio
+│   │   ├── roadmap.ts       # Phased milestones
+│   │   ├── skills.ts        # Authentically retained engineering fundamentals
+│   │   └── timeline.ts      # Hackathons & learning history
 │   ├── hooks/
-│   │   ├── useGitHubRepos.ts    # GitHub API hook with caching & fallbacks
-│   │   ├── useMagnetic.ts       # Magnetic button effect
-│   │   └── useScrollSpy.ts      # Active section observer
+│   │   ├── useGitHubRepos.ts# GitHub API hook with caching & fallbacks
+│   │   ├── useMagnetic.ts   # Magnetic button effect
+│   │   └── useScrollSpy.ts  # Active section observer
 │   ├── styles/
-│   │   └── index.css            # Tailwind directives & design tokens
+│   │   └── index.css        # Tailwind directives, Dark/Light tokens & cursor
 │   ├── types/
-│   │   └── index.ts             # Strict TypeScript interfaces
-│   ├── App.tsx                  # Root application component
-│   └── main.tsx                 # Entry mount point
+│   │   └── index.ts         # Strict TypeScript interfaces
+│   ├── App.tsx              # Root application component
+│   └── main.tsx             # Entry mount point
 ├── index.html                   # HTML5 template with SEO & JSON-LD
 ├── package.json                 # Dependencies & scripts
 ├── tailwind.config.js           # Design system configuration
