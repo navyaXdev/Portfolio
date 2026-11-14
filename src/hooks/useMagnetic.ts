@@ -7,8 +7,12 @@ export function useMagnetic<T extends HTMLElement>(strength: number = 0.25) {
     const el = ref.current;
     if (!el) return;
 
-    // Skip on touch devices or reduced motion
-    if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Skip on touch devices, no-hover screens, or reduced motion
+    if (
+      window.matchMedia('(pointer: coarse)').matches ||
+      !window.matchMedia('(hover: hover)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       return;
     }
 

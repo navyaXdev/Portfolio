@@ -34,9 +34,9 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = 'relative inline-flex items-center justify-center font-mono font-medium tracking-wider uppercase transition-all duration-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-glow/40 active:scale-[0.98] select-none';
 
   const sizeStyles = {
-    sm: 'text-xs px-3.5 py-2 gap-1.5',
-    md: 'text-xs sm:text-sm px-5 py-2.5 gap-2',
-    lg: 'text-sm sm:text-base px-7 py-3.5 gap-2.5'
+    sm: 'text-xs px-3.5 py-2.5 gap-1.5 min-h-[44px]',
+    md: 'text-xs sm:text-sm px-5 py-3 gap-2 min-h-[46px]',
+    lg: 'text-sm sm:text-base px-7 py-3.5 gap-2.5 min-h-[50px]'
   };
 
   const variantStyles = {

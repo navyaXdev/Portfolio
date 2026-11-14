@@ -80,13 +80,14 @@ export const Contact: React.FC = () => {
             </div>
 
             {/* CTA action buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-white/5">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-4 border-t border-white/5 w-full">
               <Button
                 variant="primary"
                 size="md"
                 asLink
                 href={`mailto:${profileData.contact.email}`}
                 icon={<Mail className="w-4 h-4" />}
+                className="w-full sm:w-auto min-h-[48px]"
               >
                 Send Email Directly
               </Button>
@@ -98,6 +99,7 @@ export const Contact: React.FC = () => {
                 href={profileData.contact.github}
                 target="_blank"
                 icon={<Github className="w-4 h-4" />}
+                className="w-full sm:w-auto min-h-[48px]"
               >
                 Explore GitHub
               </Button>

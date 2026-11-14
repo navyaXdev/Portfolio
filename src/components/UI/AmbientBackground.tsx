@@ -113,10 +113,10 @@ export const AmbientBackground: React.FC = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-void-950 transition-colors duration-300">
       {/* Calm, luxurious ambient lighting spots */}
-      <div className={`absolute -top-32 right-1/4 w-[500px] h-[500px] rounded-full blur-[140px] transition-all duration-700 ${
+      <div className={`absolute -top-32 right-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full blur-[90px] sm:blur-[140px] transition-all duration-700 pointer-events-none ${
         isLight ? 'bg-emerald-500/[0.03]' : 'bg-emerald-500/[0.035]'
       }`} />
-      <div className={`absolute top-1/2 -left-48 w-[450px] h-[450px] rounded-full blur-[160px] transition-all duration-700 ${
+      <div className={`absolute top-1/2 -left-48 w-[260px] sm:w-[450px] h-[260px] sm:h-[450px] rounded-full blur-[90px] sm:blur-[160px] transition-all duration-700 pointer-events-none ${
         isLight ? 'bg-cyan-500/[0.02]' : 'bg-cyan-500/[0.025]'
       }`} />
 

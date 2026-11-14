@@ -127,7 +127,7 @@ export const Roadmap: React.FC = () => {
                 </div>
 
                 {/* Milestone Content Card */}
-                <div className={`p-6 sm:p-7 rounded-2xl glass-card border transition-all duration-300 group-hover:-translate-y-1 ${
+                <div className={`p-4 sm:p-6 md:p-7 rounded-2xl glass-card border transition-all duration-300 group-hover:-translate-y-1 ${
                   isInProgress
                     ? 'border-cyber-cyan/35 shadow-[0_0_24px_rgba(0,184,217,0.08)] bg-void-900/95'
                     : isCompleted

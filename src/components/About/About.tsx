@@ -87,19 +87,19 @@ export const About: React.FC = () => {
             className="lg:col-span-5 space-y-6"
           >
             {/* Verified Statistics Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {profileData.stats.map((stat, idx) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-xl glass-card border border-white/5 relative overflow-hidden group hover:border-emerald-glow/30"
+                  className="p-3.5 sm:p-5 rounded-xl glass-card border border-white/5 relative overflow-hidden group hover:border-emerald-glow/30"
                 >
-                  <div className="text-3xl sm:text-4xl font-display font-black text-white group-hover:text-emerald-glow transition-colors">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-display font-black text-white group-hover:text-emerald-glow transition-colors">
                     {stat.value}
                   </div>
-                  <div className="text-xs font-mono font-medium text-cyber-silver mt-1.5">
+                  <div className="text-[11px] sm:text-xs font-mono font-medium text-cyber-silver mt-1">
                     {stat.label}
                   </div>
-                  <div className="text-[10px] font-mono text-cyber-muted mt-1">
+                  <div className="text-[10px] font-mono text-cyber-muted mt-0.5 sm:mt-1">
                     {stat.detail}
                   </div>
                 </div>

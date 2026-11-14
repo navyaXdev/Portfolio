@@ -59,7 +59,7 @@ export const Skills: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`relative px-3.5 py-1.5 rounded-lg font-mono text-xs uppercase tracking-wider transition-all select-none ${
+                className={`relative px-3.5 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-all select-none min-h-[40px] flex items-center justify-center ${
                   isActive
                     ? 'text-void-950 font-bold'
                     : 'text-cyber-silver hover:text-white hover:bg-white/5'

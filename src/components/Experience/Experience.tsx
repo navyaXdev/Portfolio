@@ -53,7 +53,7 @@ export const Experience: React.FC = () => {
               </div>
 
               {/* Milestone Card */}
-              <div className="p-6 sm:p-8 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/30 transition-all">
+              <div className="p-4 sm:p-6 md:p-8 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/30 transition-all">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xs text-cyber-muted uppercase tracking-wider">
