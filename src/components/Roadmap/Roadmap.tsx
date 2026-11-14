@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Target, CheckCircle2, CircleDot } from 'lucide-react';
+import { Target } from 'lucide-react';
 import { SectionHeading } from '../UI/SectionHeading';
 import { roadmapData } from '../../data/roadmap';
 import { Badge } from '../UI/Badge';
@@ -67,16 +67,16 @@ export const Roadmap: React.FC = () => {
           
           {/* Continuous Vertical Connecting Spine Line with Progress Reveal */}
           <div 
-            className="absolute left-0 top-0 bottom-0 w-10 pointer-events-none flex justify-center" 
+            className="timeline-track-rail absolute left-0 top-[26px] bottom-[26px] w-10 pointer-events-none" 
             aria-hidden="true"
           >
             {/* Inactive background track */}
-            <div className="w-[2px] h-full bg-white/10" />
+            <div className="timeline-line top-0 bottom-0 h-full bg-white/10" />
 
             {/* Active illuminated progress line */}
             <motion.div 
               style={{ scaleY, transformOrigin: 'top' }}
-              className="absolute top-0 w-[2px] h-full bg-gradient-to-b from-emerald-glow via-cyber-cyan to-emerald-dim shadow-[0_0_12px_rgba(0,245,160,0.5)]"
+              className="timeline-line top-0 h-full bg-gradient-to-b from-emerald-glow via-cyber-cyan to-emerald-dim shadow-[0_0_12px_rgba(0,245,160,0.5)]"
             />
           </div>
 
@@ -93,15 +93,16 @@ export const Roadmap: React.FC = () => {
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
                 className="relative pl-14 sm:pl-16 group"
               >
-                {/* Milestone Node Shape perfectly centered on the spine line */}
-                <div className="absolute left-0 top-1.5 w-10 flex items-center justify-center">
+                {/* Mathematically Centered Timeline Node Anchor */}
+                <div className="timeline-node-anchor absolute left-0 top-1.5 w-10 h-10 flex items-center justify-center pointer-events-none">
                   {/* Subtle pulsing halo for active in-progress milestone */}
                   {isInProgress && (
                     <span className="absolute w-10 h-10 rounded-full bg-cyber-cyan/20 animate-ping pointer-events-none" />
                   )}
 
+                  {/* Outer Circular Ring */}
                   <div 
-                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 z-10 relative ${
+                    className={`timeline-node w-8 h-8 rounded-full pointer-events-auto transition-transform duration-300 group-hover:scale-110 z-10 ${
                       isCompleted
                         ? 'bg-void-950 border-2 border-emerald-glow text-emerald-glow shadow-[0_0_12px_rgba(0,245,160,0.4)]'
                         : isInProgress
@@ -109,13 +110,19 @@ export const Roadmap: React.FC = () => {
                         : 'bg-void-950 border-2 border-white/20 text-cyber-muted'
                     }`}
                   >
-                    {isCompleted ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-glow" />
-                    ) : isInProgress ? (
-                      <CircleDot className="w-4 h-4 text-cyber-cyan animate-pulse" />
-                    ) : (
-                      <span className="text-xs font-mono font-bold text-cyber-muted">0{idx + 1}</span>
-                    )}
+                    {/* Inner Centering Wrapper */}
+                    <div className="timeline-node-inner w-full h-full">
+                      {/* Inner Green / Cyan / Muted Dot */}
+                      <div 
+                        className={`timeline-dot rounded-full transition-all duration-300 ${
+                          isCompleted
+                            ? 'w-2.5 h-2.5 bg-emerald-glow shadow-[0_0_8px_#00F5A0]'
+                            : isInProgress
+                            ? 'w-2.5 h-2.5 bg-cyber-cyan shadow-[0_0_10px_#00B8D9] animate-pulse'
+                            : 'w-2 h-2 bg-white/30'
+                        }`} 
+                      />
+                    </div>
                   </div>
                 </div>
 

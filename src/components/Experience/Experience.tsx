@@ -17,24 +17,39 @@ export const Experience: React.FC = () => {
         />
 
         {/* Timeline container */}
-        <div className="relative border-l border-white/10 ml-4 sm:ml-8 md:ml-32 pl-6 sm:pl-10 space-y-12">
+        <div className="relative ml-2 sm:ml-6 md:ml-40 space-y-12">
+          {/* Continuous Vertical Connecting Spine Line */}
+          <div 
+            className="timeline-track-rail absolute left-0 top-[26px] bottom-[26px] w-10 pointer-events-none" 
+            aria-hidden="true"
+          >
+            <div className="timeline-line top-0 bottom-0 h-full bg-white/10" />
+          </div>
+
           {timelineData.map((milestone, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="relative group"
+              className="relative pl-14 sm:pl-16 group"
             >
-              {/* Timeline Indicator Dot */}
-              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-void-950 border-2 border-emerald-glow flex items-center justify-center group-hover:scale-125 transition-transform shadow-glow-sm">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-glow" />
+              {/* Timestamp label pinned to left on desktop */}
+              <div className="md:absolute md:-left-36 md:top-2 md:w-32 md:text-right font-mono text-xs sm:text-sm font-bold text-emerald-glow mb-2 md:mb-0">
+                {milestone.period}
               </div>
 
-              {/* Timestamp label pinned to left on desktop */}
-              <div className="md:absolute md:-left-40 md:top-1.5 font-mono text-xs sm:text-sm font-bold text-emerald-glow mb-2 md:mb-0">
-                {milestone.period}
+              {/* Mathematically Centered Timeline Node Anchor */}
+              <div className="timeline-node-anchor absolute left-0 top-1.5 w-10 h-10 flex items-center justify-center pointer-events-none">
+                {/* Outer Circular Ring */}
+                <div className="timeline-node w-5 h-5 rounded-full bg-void-950 border-2 border-emerald-glow shadow-glow-sm pointer-events-auto transition-transform duration-200 group-hover:scale-125">
+                  {/* Inner Centering Wrapper */}
+                  <div className="timeline-node-inner w-full h-full">
+                    {/* Inner Green Dot */}
+                    <div className="timeline-dot w-1.5 h-1.5 rounded-full bg-emerald-glow shadow-[0_0_6px_#00F5A0]" />
+                  </div>
+                </div>
               </div>
 
               {/* Milestone Card */}
