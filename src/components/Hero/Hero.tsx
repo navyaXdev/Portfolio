@@ -5,6 +5,7 @@ import { Button } from '../UI/Button';
 import { Badge } from '../UI/Badge';
 import { profileData } from '../../data/profile';
 import dineshPortrait from '../../assets/dinesh-patra.jpg';
+import { EASINGS, DURATIONS } from '../../utils/motion';
 
 export const Hero: React.FC = () => {
   const scrollTo = (id: string) => {
@@ -25,22 +26,23 @@ export const Hero: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1
-      }
-    }
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
+      },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 22 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
-    }
+      transition: { duration: DURATIONS.entrance, ease: EASINGS.luxuryDecel },
+    },
   };
 
   const titleWords = ['Cybersecurity', 'Enthusiast', '•', 'Developer', '•', 'Technology', 'Explorer'];
+  const bioWords = profileData.bio.split(' ');
 
   return (
     <section id="hero" className="relative min-h-[92vh] flex items-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden scroll-mt-24">
@@ -49,7 +51,7 @@ export const Hero: React.FC = () => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, ease: 'easeOut' }}
-        className="absolute top-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-emerald-500/[0.04] blur-[140px] pointer-events-none"
+        className="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.035] blur-[140px] pointer-events-none"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
@@ -82,7 +84,7 @@ export const Hero: React.FC = () => {
                 <motion.span
                   initial={{ y: '115%', opacity: 0 }}
                   animate={{ y: '0%', opacity: 1 }}
-                  transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: DURATIONS.cinematic, ease: EASINGS.luxuryDecel }}
                   className="inline-block"
                 >
                   DINESH
@@ -92,7 +94,7 @@ export const Hero: React.FC = () => {
                 <motion.span
                   initial={{ y: '115%', opacity: 0 }}
                   animate={{ y: '0%', opacity: 1 }}
-                  transition={{ duration: 0.85, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: DURATIONS.cinematic, delay: 0.1, ease: EASINGS.luxuryDecel }}
                   className="gradient-emerald inline-block"
                 >
                   PATRA
@@ -104,7 +106,7 @@ export const Hero: React.FC = () => {
             <motion.div
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: DURATIONS.cinematic, delay: 0.25, ease: EASINGS.luxuryDecel }}
               style={{ originX: 0 }}
               className="h-[2px] w-28 bg-gradient-to-r from-emerald-glow via-cyan-400 to-transparent rounded-full shadow-[0_0_12px_rgba(0,245,160,0.5)] mb-4"
             />
@@ -146,10 +148,27 @@ export const Hero: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Main Credibility Statement */}
-            <motion.p variants={itemVariants} className="text-base sm:text-xl lg:text-2xl text-cyber-silver font-display font-medium leading-relaxed max-w-2xl mb-4 sm:mb-5">
-              "{profileData.bio}"
-            </motion.p>
+            {/* Main Credibility Statement with Word-by-Word Progressive Reveal */}
+            <motion.div variants={itemVariants} className="text-base sm:text-xl lg:text-2xl text-cyber-silver font-display font-medium leading-relaxed max-w-2xl mb-4 sm:mb-5">
+              <span>"</span>
+              {bioWords.map((word, wIdx) => (
+                <span key={wIdx} className="inline-block mr-1.5 overflow-hidden py-0.5">
+                  <motion.span
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: DURATIONS.standard,
+                      delay: 0.25 + wIdx * 0.02,
+                      ease: EASINGS.luxuryDecel,
+                    }}
+                    className="inline-block"
+                  >
+                    {word}
+                  </motion.span>
+                </span>
+              ))}
+              <span>"</span>
+            </motion.div>
 
             {/* Academic Credential Pill */}
             <motion.p variants={itemVariants} className="text-xs sm:text-sm text-cyber-muted font-body leading-relaxed max-w-xl mb-6 sm:mb-8">
@@ -234,19 +253,19 @@ export const Hero: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: DURATIONS.cinematic, delay: 0.2, ease: EASINGS.luxuryDecel }}
             className="hidden lg:flex lg:col-span-5 w-full justify-end"
           >
             <div className="relative group max-w-sm sm:max-w-md w-full cursor-default select-none">
-              {/* Subtle ambient lighting behind portrait */}
-              <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-glow/20 via-transparent to-cyan-500/10 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none" />
+              {/* Subtle ambient lighting aura behind portrait */}
+              <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-glow/20 via-transparent to-cyan-500/15 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none" />
 
               {/* Main Portrait Card Container with Cinematic Mask Reveal */}
               <motion.div
                 initial={{ clipPath: 'inset(10% 0% 0% 0%)', opacity: 0 }}
                 animate={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 }}
-                transition={{ duration: 1.0, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="relative rounded-3xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:border-emerald-glow/30 group-hover:shadow-[0_25px_70px_-10px_rgba(0,0,0,0.95)]"
+                transition={{ duration: DURATIONS.long, delay: 0.25, ease: EASINGS.luxuryDecel }}
+                className="relative rounded-3xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:border-emerald-glow/35 group-hover:shadow-[0_25px_70px_-10px_rgba(0,0,0,0.95)]"
               >
                 {/* Natural 1:1 aspect ratio container for authentic full-resolution rendering */}
                 <div className="relative aspect-square w-full overflow-hidden bg-void-950">

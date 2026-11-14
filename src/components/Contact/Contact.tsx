@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, Copy, Check, ArrowUpRight, ShieldCheck, MessageSquare } from 'lucide-react';
 import { SectionHeading } from '../UI/SectionHeading';
 import { Button } from '../UI/Button';
 import { profileData } from '../../data/profile';
+import { EASINGS, DURATIONS, VIEWPORT_CONFIG } from '../../utils/motion';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -26,7 +28,16 @@ export const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Main Direct Contact Card (7 cols) */}
-          <div className="lg:col-span-7 p-8 sm:p-10 rounded-2xl glass-card border border-white/10 flex flex-col justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: DURATIONS.entrance, ease: EASINGS.luxuryDecel }}
+            className="lg:col-span-7 p-8 sm:p-10 rounded-2xl glass-card border border-white/10 flex flex-col justify-between relative overflow-hidden group shadow-sm hover:border-emerald-glow/35 transition-all duration-300"
+          >
+            {/* Subtle top hover beam */}
+            <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-glow/0 to-transparent group-hover:via-emerald-glow transition-all duration-500" />
+
             <div>
               <div className="flex items-center gap-2 font-mono text-xs text-emerald-glow uppercase tracking-wider mb-4">
                 <MessageSquare className="w-4 h-4" />
@@ -42,9 +53,9 @@ export const Contact: React.FC = () => {
               </p>
 
               {/* Direct Email Address display & Copy widget */}
-              <div className="p-4 sm:p-5 rounded-xl bg-void-950/80 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+              <div className="p-4 sm:p-5 rounded-xl bg-void-950/80 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 group-hover:border-emerald-glow/20 transition-colors">
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <div className="p-2.5 rounded-lg bg-emerald-glow/10 text-emerald-glow shrink-0">
+                  <div className="p-2.5 rounded-lg bg-emerald-glow/10 text-emerald-glow shrink-0 border border-emerald-glow/20 shadow-glow-sm">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
@@ -62,7 +73,7 @@ export const Contact: React.FC = () => {
 
                 <button
                   onClick={handleCopyEmail}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-void-900 border border-white/10 text-xs font-mono text-cyber-silver hover:text-white hover:border-emerald-glow/40 transition-all shrink-0"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-void-900 border border-white/10 text-xs font-mono text-cyber-silver hover:text-white hover:border-emerald-glow/40 transition-all shrink-0 min-h-[38px]"
                 >
                   {copied ? (
                     <>
@@ -104,17 +115,22 @@ export const Contact: React.FC = () => {
                 Explore GitHub
               </Button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Social Profiles & Verification Links (5 cols) */}
           <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
             {/* GitHub Card */}
-            <a
+            <motion.a
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: DURATIONS.entrance, delay: 0.1, ease: EASINGS.luxuryDecel }}
               href={profileData.contact.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 transition-all flex items-center justify-between group"
+              className="p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 transition-all flex items-center justify-between group relative overflow-hidden shadow-sm hover:-translate-y-1"
             >
+              <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-glow/0 to-transparent group-hover:via-emerald-glow transition-all duration-500" />
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-void-900 border border-white/10 group-hover:border-emerald-glow/30 transition-colors">
                   <Github className="w-6 h-6 text-white group-hover:text-emerald-glow transition-colors" />
@@ -131,16 +147,21 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <ArrowUpRight className="w-5 h-5 text-cyber-muted group-hover:text-emerald-glow transition-colors shrink-0" />
-            </a>
+              <ArrowUpRight className="w-5 h-5 text-cyber-muted group-hover:text-emerald-glow transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
+            </motion.a>
 
             {/* LinkedIn Card */}
-            <a
+            <motion.a
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: DURATIONS.entrance, delay: 0.15, ease: EASINGS.luxuryDecel }}
               href={profileData.contact.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 transition-all flex items-center justify-between group"
+              className="p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 transition-all flex items-center justify-between group relative overflow-hidden shadow-sm hover:-translate-y-1"
             >
+              <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-glow/0 to-transparent group-hover:via-emerald-glow transition-all duration-500" />
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-void-900 border border-white/10 group-hover:border-emerald-glow/30 transition-colors">
                   <Linkedin className="w-6 h-6 text-white group-hover:text-emerald-glow transition-colors" />
@@ -157,11 +178,17 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <ArrowUpRight className="w-5 h-5 text-cyber-muted group-hover:text-emerald-glow transition-colors shrink-0" />
-            </a>
+              <ArrowUpRight className="w-5 h-5 text-cyber-muted group-hover:text-emerald-glow transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
+            </motion.a>
 
             {/* Trust & Location Card */}
-            <div className="p-6 rounded-2xl glass-card border border-white/5">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: DURATIONS.entrance, delay: 0.2, ease: EASINGS.luxuryDecel }}
+              className="p-6 rounded-2xl glass-card border border-white/5"
+            >
               <div className="flex items-center gap-2 font-mono text-xs text-cyber-silver mb-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-glow" />
                 <span>Verified Identity</span>
@@ -170,7 +197,7 @@ export const Contact: React.FC = () => {
                 Location: <span className="text-white">India (Available for Remote Global Roles)</span><br />
                 Response Time: <span className="text-emerald-glow">Typically within 24 hours</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

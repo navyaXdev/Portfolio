@@ -13,6 +13,7 @@ import {
 import { SectionHeading } from '../UI/SectionHeading';
 import { skillsData } from '../../data/skills';
 import { SkillItem } from '../../types';
+import { EASINGS, DURATIONS } from '../../utils/motion';
 
 const CATEGORIES = ['All', 'Programming', 'Systems & Networking'] as const;
 
@@ -25,14 +26,14 @@ export const Skills: React.FC = () => {
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Terminal': return <Terminal className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
-      case 'Cpu': return <Cpu className="w-5 h-5 text-cyber-cyan group-hover:scale-110 transition-transform duration-300" />;
-      case 'Code2': return <Code2 className="w-5 h-5 text-cyber-amber group-hover:scale-110 transition-transform duration-300" />;
-      case 'Layout': return <Layout className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
-      case 'Server': return <Server className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
-      case 'Network': return <Network className="w-5 h-5 text-cyber-cyan group-hover:scale-110 transition-transform duration-300" />;
-      case 'GitBranch': return <GitBranch className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
-      default: return <Terminal className="w-5 h-5 text-emerald-glow group-hover:scale-110 transition-transform duration-300" />;
+      case 'Terminal': return <Terminal className="w-5 h-5 text-emerald-glow group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" />;
+      case 'Cpu': return <Cpu className="w-5 h-5 text-cyber-cyan group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" />;
+      case 'Code2': return <Code2 className="w-5 h-5 text-cyber-amber group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" />;
+      case 'Layout': return <Layout className="w-5 h-5 text-emerald-glow group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" />;
+      case 'Server': return <Server className="w-5 h-5 text-emerald-glow group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" />;
+      case 'Network': return <Network className="w-5 h-5 text-cyber-cyan group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300" />;
+      case 'GitBranch': return <GitBranch className="w-5 h-5 text-emerald-glow group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" />;
+      default: return <Terminal className="w-5 h-5 text-emerald-glow group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300" />;
     }
   };
 
@@ -46,7 +47,7 @@ export const Skills: React.FC = () => {
           subtitle="A disciplined and authentic overview of the programming languages, systems, and networking foundations I actively study and understand."
         />
 
-        {/* Category Filter Tabs */}
+        {/* Category Filter Tabs with Sliding Active Pill */}
         <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/10">
           <div className="flex items-center gap-1.5 text-xs font-mono text-cyber-muted mr-2">
             <Filter className="w-3.5 h-3.5 text-emerald-glow" />
@@ -90,12 +91,17 @@ export const Skills: React.FC = () => {
                 initial={{ opacity: 0, y: 18, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.35, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  duration: DURATIONS.fast,
+                  delay: index * 0.04,
+                  ease: EASINGS.luxuryDecel,
+                }}
                 key={skill.name}
-                className="relative overflow-hidden p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.85),0_0_20px_-5px_rgba(0,245,160,0.12)]"
+                className="relative overflow-hidden p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between min-h-[250px] group shadow-sm hover:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.85),0_0_20px_-5px_rgba(0,245,160,0.12)]"
               >
                 {/* Subtle Top Gradient Hover Accent */}
                 <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-glow/0 to-transparent group-hover:via-emerald-glow transition-all duration-500" />
+                
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="p-2.5 rounded-xl bg-void-900 border border-white/10 group-hover:border-emerald-glow/30 transition-colors">
@@ -117,6 +123,11 @@ export const Skills: React.FC = () => {
                   <p className="text-xs sm:text-[13px] text-cyber-muted leading-relaxed font-body">
                     {skill.description}
                   </p>
+                </div>
+
+                <div className="pt-4 mt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-cyber-muted">
+                  <span>Verified Competency</span>
+                  <span className="text-emerald-glow/70 font-semibold">// Active Study</span>
                 </div>
               </motion.div>
             ))}

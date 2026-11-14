@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { EASINGS, DURATIONS } from '../../utils/motion';
 
 interface SectionHeadingProps {
   index: string;
@@ -18,23 +19,54 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 }) => {
   const words = title.split(' ');
 
+  const headingContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.04,
+        delayChildren: 0.02,
+      },
+    },
+  };
+
+  const wordVariants = {
+    hidden: { y: '100%', opacity: 0 },
+    visible: {
+      y: '0%',
+      opacity: 1,
+      transition: {
+        duration: DURATIONS.entrance,
+        ease: EASINGS.luxuryDecel,
+      },
+    },
+  };
+
   return (
-    <div
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-20px' }}
+      variants={headingContainerVariants}
       className={`mb-12 md:mb-16 ${
         align === 'center' ? 'text-center mx-auto max-w-2xl' : 'max-w-3xl'
       }`}
     >
-      {/* 1. Animated Index & Tag with Shimmer Badge */}
+      {/* 1. Animated Index & Tag with High-Tech Badge */}
       <motion.div
-        initial={{ opacity: 0, x: -16 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        variants={{
+          hidden: { opacity: 0, x: -16 },
+          visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: DURATIONS.fast, ease: EASINGS.luxuryDecel },
+          },
+        }}
         className={`flex items-center gap-2.5 font-mono text-xs tracking-widest uppercase text-emerald-glow mb-3 ${
           align === 'center' ? 'justify-center' : ''
         }`}
       >
-        <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white/50 text-[10px] font-bold">
+        <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white/60 text-[10px] font-bold">
           {index}
         </span>
         <span className="text-emerald-glow/50">//</span>
@@ -49,17 +81,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       >
         {words.map((word, idx) => (
           <span key={idx} className="inline-block overflow-hidden py-0.5">
-            <motion.span
-              initial={{ y: '110%', opacity: 0, rotateZ: 2 }}
-              whileInView={{ y: '0%', opacity: 1, rotateZ: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{
-                duration: 0.7,
-                delay: idx * 0.08,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="inline-block"
-            >
+            <motion.span variants={wordVariants} className="inline-block">
               {word}
             </motion.span>
           </span>
@@ -69,10 +91,18 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {/* 3. Refined Decorative Animated Luminous Line */}
       <div className={`mt-4 mb-4 flex items-center ${align === 'center' ? 'justify-center' : ''}`}>
         <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          whileInView={{ scaleX: 1, opacity: 1 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          variants={{
+            hidden: { scaleX: 0, opacity: 0 },
+            visible: {
+              scaleX: 1,
+              opacity: 1,
+              transition: {
+                duration: DURATIONS.cinematic,
+                delay: 0.15,
+                ease: EASINGS.luxuryDecel,
+              },
+            },
+          }}
           style={{ originX: align === 'center' ? 0.5 : 0 }}
           className="h-[2px] w-24 bg-gradient-to-r from-emerald-glow via-cyan-400 to-transparent rounded-full shadow-[0_0_12px_rgba(0,245,160,0.4)]"
         />
@@ -81,15 +111,23 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {/* 4. Smooth Staggered Subtitle Entrance */}
       {subtitle && (
         <motion.p
-          initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
-          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          variants={{
+            hidden: { opacity: 0, y: 14 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: DURATIONS.entrance,
+                delay: 0.2,
+                ease: EASINGS.luxuryDecel,
+              },
+            },
+          }}
           className="text-base sm:text-lg text-cyber-muted font-body leading-relaxed max-w-2xl"
         >
           {subtitle}
         </motion.p>
       )}
-    </div>
+    </motion.div>
   );
 };

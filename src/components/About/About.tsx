@@ -1,8 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, CheckCircle2, Compass } from 'lucide-react';
+import { GraduationCap, CheckCircle2, Compass, ShieldCheck } from 'lucide-react';
 import { SectionHeading } from '../UI/SectionHeading';
 import { profileData } from '../../data/profile';
+import { EASINGS, DURATIONS, VIEWPORT_CONFIG } from '../../utils/motion';
+
+// Animated Stat Counter Component
+const AnimatedStatValue: React.FC<{ rawValue: string }> = ({ rawValue }) => {
+  const numericMatch = rawValue.match(/\d+/);
+  const targetNum = numericMatch ? parseInt(numericMatch[0], 10) : 0;
+  const suffix = rawValue.replace(/\d+/, '');
+  const [currentVal, setCurrentVal] = useState(0);
+
+  useEffect(() => {
+    if (targetNum <= 0) {
+      setCurrentVal(0);
+      return;
+    }
+    const duration = 1200;
+    const startTime = performance.now();
+
+    const step = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      setCurrentVal(Math.round(ease * targetNum));
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        setCurrentVal(targetNum);
+      }
+    };
+
+    const id = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(id);
+  }, [targetNum]);
+
+  return (
+    <span>
+      {currentVal}
+      {suffix}
+    </span>
+  );
+};
 
 export const About: React.FC = () => {
   const containerVariants = {
@@ -10,10 +50,10 @@ export const About: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
+      },
+    },
   };
 
   const itemVariants = {
@@ -21,8 +61,8 @@ export const About: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-    }
+      transition: { duration: DURATIONS.entrance, ease: EASINGS.luxuryDecel },
+    },
   };
 
   const checkpoints = [
@@ -31,7 +71,7 @@ export const About: React.FC = () => {
     'Python Scripting & Automation Tooling',
     'Network Fundamentals & Socket Diagnostics',
     'Web Architecture & Frontend Standards (HTML/CSS/JS)',
-    'Version Control & Source Code on GitHub'
+    'Version Control & Source Code on GitHub',
   ];
 
   return (
@@ -51,7 +91,7 @@ export const About: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={VIEWPORT_CONFIG}
             className="lg:col-span-7 space-y-6 text-cyber-silver/90 text-base sm:text-lg leading-relaxed font-body"
           >
             <motion.p variants={itemVariants}>
@@ -69,15 +109,18 @@ export const About: React.FC = () => {
             {/* Academic Credential Card with Subtle Bevel */}
             <motion.div
               variants={itemVariants}
-              className="mt-8 p-6 sm:p-7 rounded-2xl glass-card border-l-4 border-l-emerald-glow border border-white/5 shadow-sm"
+              className="mt-8 p-6 sm:p-7 rounded-2xl glass-card border-l-4 border-l-emerald-glow border border-white/5 shadow-sm relative overflow-hidden group"
             >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-emerald-glow/10 text-emerald-glow shrink-0 border border-emerald-glow/20">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-glow/5 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-glow/10 transition-colors" />
+              
+              <div className="flex items-start gap-4 relative z-10">
+                <div className="p-3 rounded-xl bg-emerald-glow/10 text-emerald-glow shrink-0 border border-emerald-glow/20 shadow-glow-sm">
                   <GraduationCap className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-emerald-glow uppercase tracking-wider mb-1 font-semibold">
-                    Academic Background
+                  <div className="text-xs font-mono text-emerald-glow uppercase tracking-wider mb-1 font-semibold flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Academic Background</span>
                   </div>
                   <h3 className="text-lg sm:text-xl font-display font-bold text-white">
                     {profileData.education.degree}
@@ -95,7 +138,10 @@ export const About: React.FC = () => {
             {/* Technical Focus Checkpoints */}
             <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
               {checkpoints.map((focus, idx) => (
-                <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm text-cyber-silver">
+                <div
+                  key={idx}
+                  className="flex items-center gap-2.5 text-xs sm:text-sm text-cyber-silver p-2.5 rounded-xl bg-void-900/60 border border-white/5 hover:border-emerald-glow/30 transition-colors"
+                >
                   <CheckCircle2 className="w-4 h-4 text-emerald-glow shrink-0" />
                   <span>{focus}</span>
                 </div>
@@ -108,19 +154,22 @@ export const About: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={VIEWPORT_CONFIG}
             className="lg:col-span-5 space-y-6"
           >
-            {/* Verified Statistics Grid with Staggered Cards */}
+            {/* Verified Statistics Grid with Animated Staggered Counters */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {profileData.stats.map((stat, idx) => (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="p-4 sm:p-5 rounded-2xl glass-card border border-white/5 relative overflow-hidden group hover:border-emerald-glow/30 transition-all duration-300 shadow-sm hover:-translate-y-1"
+                  className="p-4 sm:p-5 rounded-2xl glass-card border border-white/5 relative overflow-hidden group hover:border-emerald-glow/35 transition-all duration-300 shadow-sm hover:-translate-y-1"
                 >
+                  {/* Subtle top hover beam */}
+                  <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-glow/0 to-transparent group-hover:via-emerald-glow transition-all duration-500" />
+
                   <div className="text-2xl sm:text-3xl md:text-4xl font-display font-black text-white group-hover:text-emerald-glow transition-colors">
-                    {stat.value}
+                    <AnimatedStatValue rawValue={stat.value} />
                   </div>
                   <div className="text-[11px] sm:text-xs font-mono font-medium text-cyber-silver mt-1">
                     {stat.label}
@@ -142,10 +191,10 @@ export const About: React.FC = () => {
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="p-5 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/20 transition-all duration-300 hover:-translate-y-0.5"
+                  className="p-5 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/25 transition-all duration-300 hover:-translate-y-0.5 group"
                 >
-                  <div className="flex items-center gap-2.5 font-display font-bold text-white text-base mb-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-glow" />
+                  <div className="flex items-center gap-2.5 font-display font-bold text-white text-base mb-1.5 group-hover:text-emerald-glow transition-colors">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-glow shadow-glow-sm" />
                     <h4>{pillar.title}</h4>
                   </div>
                   <p className="text-xs sm:text-sm text-cyber-muted font-body leading-relaxed">

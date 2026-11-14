@@ -4,6 +4,7 @@ import { Target } from 'lucide-react';
 import { SectionHeading } from '../UI/SectionHeading';
 import { roadmapData } from '../../data/roadmap';
 import { Badge } from '../UI/Badge';
+import { EASINGS, DURATIONS, VIEWPORT_CONFIG } from '../../utils/motion';
 
 export const Roadmap: React.FC = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -34,9 +35,9 @@ export const Roadmap: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6 }}
-          className="p-6 sm:p-8 rounded-2xl glass-card border border-emerald-glow/25 relative overflow-hidden mb-16 shadow-[0_0_30px_rgba(0,245,160,0.06)]"
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: DURATIONS.entrance, ease: EASINGS.luxuryDecel }}
+          className="p-6 sm:p-8 rounded-2xl glass-card border border-emerald-glow/25 relative overflow-hidden mb-16 shadow-[0_0_30px_rgba(0,245,160,0.06)] group"
         >
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-glow via-cyber-cyan to-transparent" />
 
@@ -87,10 +88,10 @@ export const Roadmap: React.FC = () => {
             return (
               <motion.div
                 key={step.phase}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                viewport={VIEWPORT_CONFIG}
+                transition={{ duration: DURATIONS.entrance, delay: idx * 0.06, ease: EASINGS.luxuryDecel }}
                 className="relative pl-14 sm:pl-16 group"
               >
                 {/* Mathematically Centered Timeline Node Anchor */}
@@ -127,13 +128,18 @@ export const Roadmap: React.FC = () => {
                 </div>
 
                 {/* Milestone Content Card */}
-                <div className={`p-4 sm:p-6 md:p-7 rounded-2xl glass-card border transition-all duration-300 group-hover:-translate-y-1 ${
+                <div className={`p-5 sm:p-6 md:p-7 rounded-2xl glass-card border transition-all duration-300 group-hover:-translate-y-1 relative overflow-hidden ${
                   isInProgress
                     ? 'border-cyber-cyan/35 shadow-[0_0_24px_rgba(0,184,217,0.08)] bg-void-900/95'
                     : isCompleted
                     ? 'border-emerald-glow/20 bg-void-900/80 hover:border-emerald-glow/35'
                     : 'border-white/5 opacity-85 hover:opacity-100 hover:border-white/15'
                 }`}>
+                  {/* Subtle top hover beam */}
+                  <div className={`absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent ${
+                    isInProgress ? 'via-cyber-cyan' : 'via-emerald-glow/0 group-hover:via-emerald-glow'
+                  } to-transparent transition-all duration-500`} />
+
                   {/* Card Header: Phase, Status Badge, Step Number */}
                   <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-2.5">

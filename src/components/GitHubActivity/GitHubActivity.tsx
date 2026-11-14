@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { SectionHeading } from '../UI/SectionHeading';
 import { useGitHubRepos } from '../../hooks/useGitHubRepos';
+import { EASINGS, DURATIONS } from '../../utils/motion';
 
 const LANGUAGE_COLORS: Record<string, string> = {
   Python: '#3572A5',
@@ -224,13 +225,13 @@ export const GitHubActivity: React.FC = () => {
                   <motion.div
                     key={repo.id}
                     layout
-                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    initial={{ opacity: 0, y: 24, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.93, transition: { duration: 0.25 } }}
+                    exit={{ opacity: 0, scale: 0.93, transition: { duration: DURATIONS.fast } }}
                     transition={{
-                      duration: 0.55,
-                      delay: Math.min(idx * 0.05, 0.3),
-                      ease: [0.16, 1, 0.3, 1],
+                      duration: DURATIONS.standard,
+                      delay: Math.min(idx * 0.04, 0.25),
+                      ease: EASINGS.luxuryDecel,
                     }}
                     className="group relative p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 transition-all duration-300 flex flex-col justify-between min-h-[220px] h-full hover:-translate-y-2 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.9),0_0_24px_-6px_rgba(0,245,160,0.18)] overflow-hidden"
                   >

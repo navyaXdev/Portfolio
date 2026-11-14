@@ -14,6 +14,7 @@ import {
 import { SectionHeading } from '../UI/SectionHeading';
 import { achievementsData } from '../../data/achievements';
 import { Button } from '../UI/Button';
+import { EASINGS, DURATIONS, VIEWPORT_CONFIG } from '../../utils/motion';
 
 export const Achievements: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -65,8 +66,8 @@ export const Achievements: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: DURATIONS.entrance, ease: EASINGS.luxuryDecel }}
               className="p-6 sm:p-8 md:p-10 rounded-2xl glass-card border border-emerald-glow/20 relative overflow-hidden shadow-[0_0_40px_rgba(0,245,160,0.04)]"
             >
               {/* Top gradient accent */}
@@ -80,7 +81,7 @@ export const Achievements: React.FC = () => {
                     initial={{ clipPath: 'inset(10% 0% 0% 0%)', opacity: 0 }}
                     whileInView={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: DURATIONS.cinematic, ease: EASINGS.luxuryDecel }}
                     onClick={() => verifiedItem.image && setSelectedImage(verifiedItem.image)}
                     className="relative group w-full cursor-pointer rounded-2xl overflow-hidden bg-void-950 border border-white/10 hover:border-emerald-glow/50 transition-all shadow-xl aspect-[1.414/1] max-w-md"
                     title="Click to view full certificate"
@@ -239,8 +240,8 @@ export const Achievements: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: 0.15 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: DURATIONS.entrance, delay: 0.1, ease: EASINGS.luxuryDecel }}
               className="p-6 sm:p-8 rounded-2xl glass-card border border-white/10 hover:border-cyber-amber/30 transition-all relative overflow-hidden"
             >
               {/* Top indicator bar */}
