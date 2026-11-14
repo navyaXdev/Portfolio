@@ -62,7 +62,9 @@ export const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 ${
+        isMobileMenuOpen ? 'z-50' : 'z-40'
+      } transition-all duration-300 ${
         isScrolled
           ? 'bg-void-950/85 backdrop-blur-xl border-b border-white/10 py-3 shadow-lg shadow-black/50'
           : 'bg-transparent py-4 sm:py-5'

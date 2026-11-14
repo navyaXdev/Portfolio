@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShieldCheck, 
@@ -306,84 +307,88 @@ export const Achievements: React.FC = () => {
       </div>
 
       {/* Interactive Lightbox Modal for Certificate Preview */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-void-950/90 backdrop-blur-xl"
-            onClick={() => setSelectedImage(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.94, opacity: 0, y: 15 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.94, opacity: 0, y: 15 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative max-w-5xl w-full max-h-[92vh] flex flex-col bg-void-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
-              onClick={e => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between p-4 px-6 border-b border-white/10 bg-void-950/80">
-                <div className="flex items-center gap-2.5">
-                  <ShieldCheck className="w-4 h-4 text-emerald-glow" />
-                  <span className="font-mono text-xs font-bold text-white uppercase tracking-wider">
-                    Official Credential Preview
-                  </span>
-                  <span className="text-white/20">|</span>
-                  <span className="font-mono text-xs text-cyber-silver">
-                    {verifiedItem?.credentialId}
-                  </span>
-                </div>
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {selectedImage && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-void-950/90 backdrop-blur-xl"
+                onClick={() => setSelectedImage(null)}
+              >
+                <motion.div
+                  initial={{ scale: 0.94, opacity: 0, y: 15 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  exit={{ scale: 0.94, opacity: 0, y: 15 }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                  className="relative max-w-5xl w-full max-h-[92vh] flex flex-col bg-void-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+                  onClick={e => e.stopPropagation()}
+                >
+                  {/* Modal Header */}
+                  <div className="flex items-center justify-between p-4 px-6 border-b border-white/10 bg-void-950/80">
+                    <div className="flex items-center gap-2.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-glow" />
+                      <span className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                        Official Credential Preview
+                      </span>
+                      <span className="text-white/20">|</span>
+                      <span className="font-mono text-xs text-cyber-silver">
+                        {verifiedItem?.credentialId}
+                      </span>
+                    </div>
 
-                <div className="flex items-center gap-2">
-                  {verifiedItem?.credentialId && (
-                    <button
-                      onClick={() => handleCopyId(verifiedItem.credentialId!)}
-                      className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-void-900 border border-white/10 text-xs font-mono text-cyber-silver hover:text-white transition-colors"
-                    >
-                      {copiedId === verifiedItem.credentialId ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-emerald-glow" />
-                          <span className="text-emerald-glow">Copied</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5" />
-                          <span>Copy ID</span>
-                        </>
+                    <div className="flex items-center gap-2">
+                      {verifiedItem?.credentialId && (
+                        <button
+                          onClick={() => handleCopyId(verifiedItem.credentialId!)}
+                          className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-void-900 border border-white/10 text-xs font-mono text-cyber-silver hover:text-white transition-colors"
+                        >
+                          {copiedId === verifiedItem.credentialId ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 text-emerald-glow" />
+                              <span className="text-emerald-glow">Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3.5 h-3.5" />
+                              <span>Copy ID</span>
+                            </>
+                          )}
+                        </button>
                       )}
-                    </button>
-                  )}
 
-                  <button
-                    onClick={() => setSelectedImage(null)}
-                    className="p-1.5 rounded-lg bg-void-900 border border-white/10 text-cyber-muted hover:text-white hover:border-emerald-glow/40 transition-colors"
-                    aria-label="Close Preview"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
+                      <button
+                        onClick={() => setSelectedImage(null)}
+                        className="p-1.5 rounded-lg bg-void-900 border border-white/10 text-cyber-muted hover:text-white hover:border-emerald-glow/40 transition-colors"
+                        aria-label="Close Preview"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Modal Image Viewport */}
-              <div className="p-3 sm:p-6 overflow-auto flex items-center justify-center bg-void-950/50">
-                <img
-                  src={selectedImage}
-                  alt="Full Resolution Verified Certificate"
-                  className="max-h-[76vh] w-auto object-contain rounded-lg shadow-2xl border border-white/5"
-                />
-              </div>
+                  {/* Modal Image Viewport */}
+                  <div className="p-3 sm:p-6 overflow-auto flex items-center justify-center bg-void-950/50">
+                    <img
+                      src={selectedImage}
+                      alt="Full Resolution Verified Certificate"
+                      className="max-h-[76vh] w-auto object-contain rounded-lg shadow-2xl border border-white/5"
+                    />
+                  </div>
 
-              {/* Modal Footer */}
-              <div className="p-3 px-6 border-t border-white/10 bg-void-950/80 flex items-center justify-between text-xs font-mono text-cyber-muted">
-                <span>Verified by NYC CodeQuest / NYX Hackathon Official Organizers</span>
-                <span className="hidden sm:inline">Press Esc or click backdrop to close</span>
-              </div>
-            </motion.div>
-          </motion.div>
+                  {/* Modal Footer */}
+                  <div className="p-3 px-6 border-t border-white/10 bg-void-950/80 flex items-center justify-between text-xs font-mono text-cyber-muted">
+                    <span>Verified by NYC CodeQuest / NYX Hackathon Official Organizers</span>
+                    <span className="hidden sm:inline">Press Esc or click backdrop to close</span>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </section>
   );
 };

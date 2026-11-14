@@ -39,7 +39,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Update meta theme-color for mobile address bars
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', newTheme === 'light' ? '#F8F9FA' : '#08090B');
+      metaThemeColor.setAttribute('content', newTheme === 'light' ? '#F7F9FC' : '#08090B');
     }
   };
 

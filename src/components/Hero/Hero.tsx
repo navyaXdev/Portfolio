@@ -6,8 +6,11 @@ import { Badge } from '../UI/Badge';
 import { profileData } from '../../data/profile';
 import dineshPortrait from '../../assets/dinesh-patra.jpg';
 import { EASINGS, DURATIONS } from '../../utils/motion';
+import { useTheme } from '../../context/ThemeContext';
 
 export const Hero: React.FC = () => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   // =========================================================================
   // SUBTLE 3D MOUSE-HOVER TILT & DYNAMIC GLARE SPECULAR INTERACTION
   // Strictly isolated to Dinesh's Desktop Portrait Card (Zero effect on network)
@@ -26,7 +29,9 @@ export const Hero: React.FC = () => {
   const glareBackground = useTransform([mouseX, mouseY], ([mx, my]) => {
     const x = ((mx as number) + 0.5) * 100;
     const y = ((my as number) + 0.5) * 100;
-    return `radial-gradient(circle 340px at ${x}% ${y}%, rgba(0, 245, 160, 0.16) 0%, rgba(6, 182, 212, 0.08) 35%, transparent 75%)`;
+    return isLight
+      ? `radial-gradient(circle 340px at ${x}% ${y}%, rgba(255, 255, 255, 0.65) 0%, rgba(0, 143, 104, 0.14) 40%, transparent 75%)`
+      : `radial-gradient(circle 340px at ${x}% ${y}%, rgba(0, 245, 160, 0.16) 0%, rgba(6, 182, 212, 0.08) 35%, transparent 75%)`;
   });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {

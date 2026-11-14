@@ -88,21 +88,21 @@ export const Floating3DBackground: React.FC = () => {
 
     // Palette Definitions
     // Dark Theme: Subtle Emerald (#00F5A0), Cyan Specular (#06B6D4), Alert Red (#FF2A2A), Scanning Amber (#F59E0B)
-    // Light Theme: Deep Forest Emerald (#047857), Slate Accent (#0284C7), Alert Crimson (#DC2626)
+    // Light Theme: Deep Jewel Emerald (#008F68), Accent Teal (#087F8C), Alert Crimson (#DC2626), Scanning Amber (#D97706)
     const emeraldRGB: [number, number, number] = isLight
-      ? [0.03, 0.52, 0.38]
+      ? [0.0, 0.56, 0.41]
       : [0.0, 0.96, 0.63];
 
     const cyanRGB: [number, number, number] = isLight
-      ? [0.02, 0.42, 0.62]
+      ? [0.03, 0.50, 0.55]
       : [0.02, 0.75, 0.88];
 
     const warningRedRGB: [number, number, number] = isLight
-      ? [0.88, 0.14, 0.14]
+      ? [0.86, 0.15, 0.15]
       : [1.0, 0.16, 0.16];
 
     const goldScanRGB: [number, number, number] = isLight
-      ? [0.86, 0.56, 0.08]
+      ? [0.85, 0.47, 0.04]
       : [0.98, 0.72, 0.15];
 
     // --- Initialize Particles with Slow, Serene Ambient Velocity ---
@@ -118,11 +118,11 @@ export const Floating3DBackground: React.FC = () => {
         vx: (Math.random() - 0.5) * 0.0035,
         vy: (Math.random() - 0.5) * 0.0028,
         vz: (Math.random() - 0.5) * 0.002,
-        baseSize: isLight ? 1.6 + Math.random() * 0.9 : 1.8 + Math.random() * 1.1,
-        currentSize: 2.0,
+        baseSize: isLight ? 2.4 + Math.random() * 0.9 : 1.8 + Math.random() * 1.1,
+        currentSize: isLight ? 2.6 : 2.0,
         baseColor: [...baseCol],
         currentColor: [...baseCol],
-        opacity: isLight ? 0.7 : 0.88,
+        opacity: isLight ? 0.95 : 0.88,
         phase: Math.random() * Math.PI * 2,
         state: 'normal',
         stateTime: 0,
@@ -168,8 +168,8 @@ export const Floating3DBackground: React.FC = () => {
           
           // Sharp, saturated central nucleus that preserves authentic hue
           float alpha = smoothstep(0.5, 0.04, dist);
-          float nucleus = smoothstep(0.12, 0.0, dist);
-          vec3 col = vColor.rgb * (1.0 + nucleus * 1.3);
+          float nucleus = smoothstep(0.14, 0.0, dist);
+          ${isLight ? 'vec3 col = vColor.rgb * (1.0 - nucleus * 0.18);' : 'vec3 col = vColor.rgb * (1.0 + nucleus * 1.3);'}
           gl_FragColor = vec4(col, vColor.a * alpha);
         }
       `,
@@ -497,11 +497,11 @@ export const Floating3DBackground: React.FC = () => {
 
                 if (distSq < connectionRadius * connectionRadius) {
                   const dist = Math.sqrt(distSq);
-                  // Distance-squared falloff: close is subtle, far is near-invisible (no tangles)
+                  // Distance falloff: clear, crisp hairline connections in Light theme
                   const distRatio = 1.0 - dist / connectionRadius;
-                  const lineAlpha =
-                    Math.pow(distRatio, 2.0) *
-                    (isLight ? 0.16 : 0.24);
+                  const lineAlpha = isLight
+                    ? Math.pow(distRatio, 1.35) * 0.44
+                    : Math.pow(distRatio, 2.0) * 0.24;
 
                   const isThreat =
                     p1.state === 'warning' ||
@@ -517,7 +517,7 @@ export const Floating3DBackground: React.FC = () => {
 
                   // Lines connected to warning node illuminate in red with controlled brightness
                   const intensityBoost = isThreat ? 2.2 : isScanning ? 2.4 : 1.0;
-                  const finalAlpha = Math.min(0.75, lineAlpha * intensityBoost);
+                  const finalAlpha = Math.min(isLight ? 0.85 : 0.75, lineAlpha * intensityBoost);
 
                   // Vertex 1
                   linePositions[lineVertexIndex * 3] = p1.x;
@@ -610,9 +610,9 @@ export const Floating3DBackground: React.FC = () => {
             packetColors[k * 4] = pkt.color[0];
             packetColors[k * 4 + 1] = pkt.color[1];
             packetColors[k * 4 + 2] = pkt.color[2];
-            packetColors[k * 4 + 3] = isLight ? 0.5 * pulseFactor : 0.8 * pulseFactor;
+            packetColors[k * 4 + 3] = isLight ? 0.85 * pulseFactor : 0.8 * pulseFactor;
 
-            packetSizes[k] = (isLight ? 1.4 : 1.7) * (0.8 + 0.4 * pulseFactor);
+            packetSizes[k] = (isLight ? 2.4 : 1.7) * (0.8 + 0.4 * pulseFactor);
           }
         }
       }

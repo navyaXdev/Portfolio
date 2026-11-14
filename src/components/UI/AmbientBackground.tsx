@@ -83,7 +83,7 @@ export const AmbientBackground: React.FC = () => {
         ctx.beginPath();
         ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
         ctx.fillStyle = isLight
-          ? `rgba(5, 150, 105, ${dynamicAlpha * 0.7})`
+          ? `rgba(0, 143, 104, ${dynamicAlpha * 0.85})`
           : `rgba(0, 245, 160, ${dynamicAlpha})`;
         ctx.fill();
 
@@ -96,9 +96,9 @@ export const AmbientBackground: React.FC = () => {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            const lineAlpha = (1 - dist / 110) * (isLight ? 0.045 : 0.04);
+            const lineAlpha = (1 - dist / 110) * (isLight ? 0.08 : 0.04);
             ctx.strokeStyle = isLight
-              ? `rgba(5, 150, 105, ${lineAlpha})`
+              ? `rgba(0, 143, 104, ${lineAlpha})`
               : `rgba(0, 245, 160, ${lineAlpha})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
