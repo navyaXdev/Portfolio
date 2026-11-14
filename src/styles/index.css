@@ -270,6 +270,7 @@
 .light button.bg-emerald-glow,
 .light a.bg-emerald-glow,
 .light .bg-emerald-glow.text-void-950,
+.light .text-void-950,
 .light .bg-emerald-glow > span {
   color: #FFFFFF !important;
 }

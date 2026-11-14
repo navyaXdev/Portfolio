@@ -59,13 +59,20 @@ export const Skills: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-3.5 py-1.5 rounded-lg font-mono text-xs uppercase tracking-wider transition-all select-none ${
+                className={`relative px-3.5 py-1.5 rounded-lg font-mono text-xs uppercase tracking-wider transition-all select-none ${
                   isActive
-                    ? 'bg-emerald-glow text-void-950 font-bold shadow-glow-sm'
-                    : 'bg-void-900/60 text-cyber-silver hover:text-white hover:bg-white/10 border border-white/5'
+                    ? 'text-void-950 font-bold'
+                    : 'text-cyber-silver hover:text-white hover:bg-white/5'
                 }`}
               >
-                {category}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeSkillCategory"
+                    className="absolute inset-0 bg-emerald-glow rounded-lg -z-10 shadow-glow-sm"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span>{category}</span>
               </button>
             );
           })}

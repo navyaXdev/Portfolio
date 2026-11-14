@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, Github, Linkedin, Mail, ChevronDown, MapPin, Compass, ShieldCheck } from 'lucide-react';
 import { Button } from '../UI/Button';
 import { Badge } from '../UI/Badge';
@@ -7,6 +7,29 @@ import { profileData } from '../../data/profile';
 import dineshPortrait from '../../assets/dinesh-patra.jpg';
 
 export const Hero: React.FC = () => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Subtle interactive 3D parallax on portrait card
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), { stiffness: 120, damping: 20 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), { stiffness: 120, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -19,6 +42,27 @@ export const Hero: React.FC = () => {
     }
   };
 
+  // Cinematic staggered text container
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
     <section id="hero" className="relative min-h-[92vh] flex items-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
@@ -26,13 +70,13 @@ export const Hero: React.FC = () => {
           
           {/* Left Column: Personal Introduction & Positioning (7 cols) */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
             className="lg:col-span-7 flex flex-col items-start text-left"
           >
             {/* Status & Availability Badge */}
-            <div className="flex flex-wrap items-center gap-2.5 mb-6">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 mb-6">
               <Badge variant="emerald" pulseDot size="sm">
                 OPEN TO WORK &amp; INTERNSHIPS
               </Badge>
@@ -40,37 +84,37 @@ export const Hero: React.FC = () => {
                 <MapPin className="w-3.5 h-3.5 text-emerald-glow/70 shrink-0" />
                 <span>India · Remote Friendly</span>
               </span>
-            </div>
+            </motion.div>
 
             {/* Name Heading with Editorial Typography */}
-            <h1 className="text-4xl sm:text-6xl xl:text-7xl font-display font-extrabold text-white tracking-tight leading-[1.05] mb-4">
+            <motion.h1 variants={itemVariants} className="text-4xl sm:text-6xl xl:text-7xl font-display font-extrabold text-white tracking-tight leading-[1.05] mb-4">
               DINESH{' '}
               <span className="gradient-emerald inline-block">
                 PATRA
               </span>
-            </h1>
+            </motion.h1>
 
             {/* Professional Positioning Roles */}
-            <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base font-mono text-emerald-glow tracking-wider mb-5">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2 text-sm sm:text-base font-mono text-emerald-glow tracking-wider mb-5">
               <span>Cybersecurity Enthusiast</span>
               <span className="text-white/20">|</span>
               <span>Developer</span>
               <span className="text-white/20">|</span>
               <span>Technology Explorer</span>
-            </div>
+            </motion.div>
 
             {/* Main Credibility Statement */}
-            <p className="text-lg sm:text-xl lg:text-2xl text-cyber-silver font-display font-medium leading-relaxed max-w-2xl mb-5">
+            <motion.p variants={itemVariants} className="text-lg sm:text-xl lg:text-2xl text-cyber-silver font-display font-medium leading-relaxed max-w-2xl mb-5">
               "{profileData.bio}"
-            </p>
+            </motion.p>
 
             {/* Academic Credential Pill */}
-            <p className="text-sm text-cyber-muted font-body leading-relaxed max-w-xl mb-8">
+            <motion.p variants={itemVariants} className="text-sm text-cyber-muted font-body leading-relaxed max-w-xl mb-8">
               First-year B.Sc. student grounding computer science theory in practical systems engineering, Linux environments, and hands-on web application security.
-            </p>
+            </motion.p>
 
             {/* Three Distinct High-Impact CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 mb-10 w-full sm:w-auto">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3.5 mb-10 w-full sm:w-auto">
               <Button
                 variant="primary"
                 size="md"
@@ -102,10 +146,10 @@ export const Hero: React.FC = () => {
               >
                 GitHub Profile
               </Button>
-            </div>
+            </motion.div>
 
             {/* Verified Direct Links */}
-            <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-white/5 w-full">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-6 pt-6 border-t border-white/5 w-full">
               <span className="font-mono text-xs text-cyber-muted uppercase tracking-wider hidden sm:inline">
                 Direct Profiles:
               </span>
@@ -140,22 +184,28 @@ export const Hero: React.FC = () => {
                   <span>Email</span>
                 </a>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
-          {/* Right Column: Large Luxury Portrait Framing (5 cols) */}
+          {/* Right Column: Large Luxury Portrait Framing with 3D Tilt (5 cols) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 w-full flex justify-center lg:justify-end"
+            transition={{ duration: 0.85, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 w-full flex justify-center lg:justify-end [perspective:1200px]"
           >
-            <div className="relative group max-w-sm sm:max-w-md w-full">
+            <motion.div
+              ref={cardRef}
+              style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              className="relative group max-w-sm sm:max-w-md w-full cursor-default select-none"
+            >
               {/* Subtle ambient lighting behind portrait */}
               <div className="absolute -inset-2 bg-gradient-to-tr from-emerald-glow/20 via-transparent to-cyan-500/10 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none" />
 
               {/* Main Portrait Card Container */}
-              <div className="relative rounded-3xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85)]">
+              <div className="relative rounded-3xl overflow-hidden bg-void-900 border border-white/10 ring-1 ring-emerald-glow/20 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85)] transition-shadow duration-500 group-hover:shadow-[0_25px_70px_-10px_rgba(0,0,0,0.95)]">
                 {/* Natural 1:1 aspect ratio container for full-resolution rendering */}
                 <div className="relative aspect-square w-full overflow-hidden bg-void-950">
                   <img
@@ -182,7 +232,7 @@ export const Hero: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 

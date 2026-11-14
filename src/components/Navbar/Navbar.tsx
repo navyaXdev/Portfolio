@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { profileData } from '../../data/profile';
@@ -104,7 +105,11 @@ export const Navbar: React.FC = () => {
                 }`}
               >
                 {isActive && (
-                  <span className="absolute inset-0 rounded-full bg-emerald-glow/15 border border-emerald-glow/40 shadow-glow-sm -z-10" />
+                  <motion.span
+                    layoutId="activeNavIndicator"
+                    className="absolute inset-0 rounded-full bg-emerald-glow/15 border border-emerald-glow/40 shadow-glow-sm -z-10"
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  />
                 )}
                 {item.label}
               </button>
