@@ -1,0 +1,5 @@
+# Robots.txt for Dinesh Patra's Portfolio
+User-agent: *
+Allow: /
+
+Sitemap: https://navyaxdev.github.io/Portfolio/sitemap.xml

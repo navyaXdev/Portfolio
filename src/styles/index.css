@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Share+Tech+Mono&family=Syne:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #08090B;
+    --bg-secondary: #0D1015;
+    --bg-card: #13171F;
+    --bg-card-hover: #191E28;
+    --accent-emerald: #00F5A0;
+    --accent-emerald-dim: #00C97F;
+    --accent-cyan: #00B8D9;
+    --accent-amber: #FFB830;
+    --accent-crimson: #FF3C5F;
+    --text-primary: #F5F7FA;
+    --text-secondary: #C5CBD3;
+    --text-muted: #9298A1;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-active: rgba(0, 245, 160, 0.35);
+  }
+
+  .light {
+    --bg-primary: #F8F9FA;
+    --bg-secondary: #F1F3F5;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F8F9FA;
+    --accent-emerald: #059669;
+    --accent-emerald-dim: #047857;
+    --accent-cyan: #0284C7;
+    --accent-amber: #D97706;
+    --accent-crimson: #DC2626;
+    --text-primary: #111827;
+    --text-secondary: #374151;
+    --text-muted: #6B7280;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-active: rgba(5, 150, 105, 0.4);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body {
+    overflow-x: hidden;
+    position: relative;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background-color: rgba(0, 245, 160, 0.25);
+    color: #FFFFFF;
+  }
+
+  .light ::selection {
+    background-color: rgba(5, 150, 105, 0.2);
+    color: #111827;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #08090B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1C232E;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00F5A0;
+  }
+
+  .light ::-webkit-scrollbar-track {
+    background: #F8F9FA;
+  }
+  .light ::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+  }
+  .light ::-webkit-scrollbar-thumb:hover {
+    background: #059669;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(13, 16, 21, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .glass-card {
+    background: linear-gradient(180deg, rgba(19, 23, 31, 0.85) 0%, rgba(13, 16, 21, 0.85) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(0, 245, 160, 0.25);
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.75), 0 0 20px -5px rgba(0, 245, 160, 0.08);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #FFFFFF 0%, #A2ABB7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-emerald {
+    background: linear-gradient(135deg, #00F5A0 0%, #00B8D9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-border-emerald {
+    position: relative;
+  }
+  .gradient-border-emerald::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 245, 160, 0.35), transparent 60%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* =========================================================
+   LIGHT LUXURY THEME OVERRIDES
+   Sophisticated ivory, pure white surfaces, charcoal typography,
+   and restrained deep emerald accents.
+   ========================================================= */
+.light {
+  color: #111827;
+}
+
+.light body {
+  background-color: #F8F9FA !important;
+  color: #111827 !important;
+}
+
+/* Surfaces and Cards */
+.light .bg-void-950 {
+  background-color: #F8F9FA !important;
+}
+.light .bg-void-950\/80,
+.light .bg-void-950\/85,
+.light .bg-void-950\/90,
+.light .bg-void-950\/95,
+.light .bg-void-950\/98 {
+  background-color: rgba(248, 249, 250, 0.95) !important;
+}
+.light .bg-void-900 {
+  background-color: #FFFFFF !important;
+}
+.light .bg-void-900\/60,
+.light .bg-void-900\/80,
+.light .bg-void-900\/90,
+.light .bg-void-900\/95 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+.light .bg-void-850 {
+  background-color: #F3F4F6 !important;
+}
+.light .bg-void-800 {
+  background-color: #E5E7EB !important;
+}
+.light .bg-void-700 {
+  background-color: #D1D5DB !important;
+}
+
+/* Glass Panels & Glass Cards */
+.light .glass-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+}
+.light .glass-card:hover {
+  border-color: rgba(5, 150, 105, 0.35) !important;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.08), 0 0 20px -5px rgba(5, 150, 105, 0.12) !important;
+}
+.light .glass-panel {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Typography in Light Mode */
+.light .text-white {
+  color: #111827 !important;
+}
+.light .text-white\/90 {
+  color: #1F2937 !important;
+}
+.light .text-white\/80,
+.light .text-white\/70 {
+  color: #374151 !important;
+}
+.light .text-white\/40,
+.light .text-white\/30,
+.light .text-white\/20 {
+  color: rgba(0, 0, 0, 0.25) !important;
+}
+.light .text-cyber-silver,
+.light .text-cyber-silver\/90,
+.light .text-cyber-silver\/80 {
+  color: #374151 !important;
+}
+.light .text-cyber-muted {
+  color: #6B7280 !important;
+}
+
+/* Borders in Light Mode */
+.light .border-white\/5,
+.light .border-white\/10,
+.light .border-white\/15,
+.light .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+.light .border-t.border-white\/5,
+.light .border-b.border-white\/5,
+.light .border-l.border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+.light .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Gradients in Light Mode */
+.light .gradient-text {
+  background: linear-gradient(135deg, #111827 0%, #374151 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.light .gradient-emerald {
+  background: linear-gradient(135deg, #059669 0%, #0284C7 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Emerald Accents in Light Mode */
+.light .text-emerald-glow {
+  color: #059669 !important;
+}
+.light .bg-emerald-glow {
+  background-color: #059669 !important;
+}
+.light button.bg-emerald-glow,
+.light a.bg-emerald-glow,
+.light .bg-emerald-glow.text-void-950,
+.light .bg-emerald-glow > span {
+  color: #FFFFFF !important;
+}
+.light button.bg-emerald-glow:hover,
+.light a.bg-emerald-glow:hover {
+  background-color: #047857 !important;
+}
+.light .border-emerald-glow,
+.light .border-emerald-glow\/20,
+.light .border-emerald-glow\/25,
+.light .border-emerald-glow\/30,
+.light .border-emerald-glow\/40 {
+  border-color: rgba(5, 150, 105, 0.35) !important;
+}
+.light .bg-emerald-glow\/10,
+.light .bg-emerald-glow\/15,
+.light .bg-emerald-glow\/20 {
+  background-color: rgba(5, 150, 105, 0.08) !important;
+}
+
+/* Cyan & Amber in Light Mode */
+.light .text-cyber-cyan {
+  color: #0284C7 !important;
+}
+.light .border-cyber-cyan,
+.light .border-cyber-cyan\/25,
+.light .border-cyber-cyan\/35 {
+  border-color: rgba(2, 132, 199, 0.35) !important;
+}
+.light .bg-cyber-cyan\/10 {
+  background-color: rgba(2, 132, 199, 0.08) !important;
+}
+.light .text-cyber-amber {
+  color: #D97706 !important;
+}
+.light .border-cyber-amber\/25,
+.light .border-cyber-amber\/30 {
+  border-color: rgba(217, 119, 6, 0.35) !important;
+}
+.light .bg-cyber-amber\/10 {
+  background-color: rgba(217, 119, 6, 0.08) !important;
+}
+
+/* Spine line in Light Mode */
+.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* =========================================================
+   CUSTOM CURSOR SYSTEM
+   ========================================================= */
+/* Hide native Windows/browser cursor ONLY when custom cursor is active on desktop fine-pointer devices */
+html.has-custom-cursor,
+html.has-custom-cursor body,
+html.has-custom-cursor *,
+html.has-custom-cursor *::before,
+html.has-custom-cursor *::after,
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor select,
+html.has-custom-cursor label,
+html.has-custom-cursor [role="button"],
+html.has-custom-cursor [tabindex],
+html.has-custom-cursor [data-cursor-hover] {
+  cursor: none !important;
+}
+
+/* Custom luxury cursor active & hover states */
+.luxury-cursor-ring.cursor-hovering {
+  width: 44px !important;
+  height: 44px !important;
+  margin-left: -22px !important;
+  margin-top: -22px !important;
+  border-color: rgba(0, 245, 160, 0.8) !important;
+  background-color: rgba(0, 245, 160, 0.07) !important;
+  box-shadow: 0 0 16px rgba(0, 245, 160, 0.2) !important;
+}
+
+.luxury-cursor-ring.cursor-clicking {
+  width: 20px !important;
+  height: 20px !important;
+  margin-left: -10px !important;
+  margin-top: -10px !important;
+  border-color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dot-hovering {
+  transform: scale(1.3) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 8px #ffffff !important;
+}
+
+/* Custom Cursor in Light Mode */
+.light .luxury-cursor-ring {
+  border-color: rgba(5, 150, 105, 0.45) !important;
+}
+
+.light .luxury-cursor-ring.cursor-hovering {
+  border-color: rgba(5, 150, 105, 0.9) !important;
+  background-color: rgba(5, 150, 105, 0.08) !important;
+  box-shadow: 0 0 16px rgba(5, 150, 105, 0.25) !important;
+}
+
+.light .luxury-cursor-ring.cursor-clicking {
+  border-color: #111827 !important;
+  background-color: rgba(17, 24, 39, 0.15) !important;
+}
+
+.light .cursor-dot-inner {
+  background-color: #059669 !important;
+  box-shadow: 0 0 8px rgba(5, 150, 105, 0.5) !important;
+}
+
+.light .dot-hovering {
+  background-color: #111827 !important;
+  box-shadow: 0 0 8px rgba(17, 24, 39, 0.4) !important;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
