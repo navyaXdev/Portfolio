@@ -45,29 +45,29 @@ async function run() {
   console.log('Navigating to http://localhost:4173/ ...');
   await page.goto('http://localhost:4173/', { waitUntil: 'networkidle0', timeout: 30000 });
 
-  // Baseline Hero
-  await new Promise((r) => setTimeout(r, 500));
+  // Baseline Hero (0.6s)
+  await new Promise((r) => setTimeout(r, 600));
   await page.screenshot({ path: path.join(artifactDir, 'seq_01_normal_network.png') });
   console.log('Saved seq_01_normal_network.png');
 
-  // Milestone 2: Threat Detection & Red Warning Pulse (at ~2.5s)
-  await new Promise((r) => setTimeout(r, 2000));
+  // Milestone 2: Threat Detection & Solid Red Warning Node (at ~3.2s)
+  await new Promise((r) => setTimeout(r, 2600));
   await page.screenshot({ path: path.join(artifactDir, 'seq_02_threat_red_warning.png') });
   await page.screenshot({ path: path.join(artifactDir, '01_particle_network_hero.png') });
   console.log('Saved seq_02_threat_red_warning.png & 01_particle_network_hero.png');
 
-  // Milestone 3: Protection Scan (at ~4.2s)
-  await new Promise((r) => setTimeout(r, 1800));
+  // Milestone 3: Protection Scan (at ~6.2s)
+  await new Promise((r) => setTimeout(r, 3000));
   await page.screenshot({ path: path.join(artifactDir, 'seq_03_protection_scan.png') });
   console.log('Saved seq_03_protection_scan.png');
 
-  // Milestone 4: Smooth Red-to-Green Transition (at ~5.8s)
-  await new Promise((r) => setTimeout(r, 1600));
+  // Milestone 4: Smooth Red-to-Green Transition (at ~8.2s)
+  await new Promise((r) => setTimeout(r, 2000));
   await page.screenshot({ path: path.join(artifactDir, 'seq_04_red_to_green_transition.png') });
   console.log('Saved seq_04_red_to_green_transition.png');
 
-  // Milestone 5: Network Recovery & Green Wave Pulse (at ~7.0s)
-  await new Promise((r) => setTimeout(r, 1200));
+  // Milestone 5: Network Recovery & Green Wave Pulse (at ~10.4s)
+  await new Promise((r) => setTimeout(r, 2200));
   await page.screenshot({ path: path.join(artifactDir, 'seq_05_network_recovery_pulse.png') });
   console.log('Saved seq_05_network_recovery_pulse.png');
 

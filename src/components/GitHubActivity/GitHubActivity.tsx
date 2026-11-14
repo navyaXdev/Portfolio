@@ -232,7 +232,7 @@ export const GitHubActivity: React.FC = () => {
                       delay: Math.min(idx * 0.05, 0.3),
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="group relative p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.9),0_0_24px_-6px_rgba(0,245,160,0.18)] overflow-hidden"
+                    className="group relative p-6 rounded-2xl glass-card border border-white/5 hover:border-emerald-glow/40 transition-all duration-300 flex flex-col justify-between min-h-[220px] h-full hover:-translate-y-2 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.9),0_0_24px_-6px_rgba(0,245,160,0.18)] overflow-hidden"
                   >
                     {/* Subtle Top Gradient Hover Accent */}
                     <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-glow/0 to-transparent group-hover:via-emerald-glow transition-all duration-500" />
@@ -244,7 +244,7 @@ export const GitHubActivity: React.FC = () => {
                           href={repo.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-display font-bold text-lg text-white group-hover:text-emerald-glow transition-colors break-words flex items-center gap-1.5"
+                          className="font-display font-bold text-lg text-white group-hover:text-emerald-glow transition-colors break-words flex items-center gap-1.5 min-w-0 flex-1"
                         >
                           <Github className="w-4 h-4 text-cyber-muted group-hover:text-emerald-glow shrink-0 transition-colors" />
                           <span className="truncate">{repo.name}</span>
@@ -261,8 +261,8 @@ export const GitHubActivity: React.FC = () => {
                         </a>
                       </div>
 
-                      {/* Description */}
-                      <p className="text-xs sm:text-[13px] text-cyber-muted leading-relaxed font-body mb-6 line-clamp-3">
+                      {/* Description with Uniform Vertical Rhythm */}
+                      <p className="text-xs sm:text-[13px] text-cyber-muted leading-relaxed font-body mb-6 line-clamp-2 min-h-[2.5rem]">
                         {repo.description || '// No description provided for this repository.'}
                       </p>
                     </div>
