@@ -53,7 +53,7 @@ export const Achievements: React.FC = () => {
     <section id="achievements" className="py-24 relative border-t border-white/5 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          index="05"
+          index="04"
           tag="VERIFIED CREDENTIALS & HACKATHONS"
           title="Hackathons & Achievements"
           subtitle="Documented hackathon participations, competitive qualifications, and institutional credentials verified by official organizers."

@@ -75,29 +75,17 @@ async function run() {
   await page.screenshot({ path: githubPath });
   console.log('Saved 04_github_desktop.png');
 
-  // Section 5: Journey / Experience (Coaxial Timeline)
-  await scrollToSection('experience');
-  const journeyPath = path.join(artifactDir, '05_journey_desktop.png');
-  await page.screenshot({ path: journeyPath });
-  console.log('Saved 05_journey_desktop.png');
-
-  // Section 6: Achievements (Dimensional Recognition Gallery)
+  // Section 5: Achievements (Dimensional Recognition Gallery)
   await scrollToSection('achievements');
-  const achievementsPath = path.join(artifactDir, '06_achievements_desktop.png');
+  const achievementsPath = path.join(artifactDir, '05_achievements_desktop.png');
   await page.screenshot({ path: achievementsPath });
-  console.log('Saved 06_achievements_desktop.png');
+  console.log('Saved 05_achievements_desktop.png');
 
-  // Section 7: Roadmap (Progress Chevrons & Milestones)
-  await scrollToSection('roadmap');
-  const roadmapPath = path.join(artifactDir, '07_roadmap_desktop.png');
-  await page.screenshot({ path: roadmapPath });
-  console.log('Saved 07_roadmap_desktop.png');
-
-  // Section 8: Contact Section
+  // Section 6: Contact Section
   await scrollToSection('contact');
-  const contactPath = path.join(artifactDir, '08_contact_desktop.png');
+  const contactPath = path.join(artifactDir, '06_contact_desktop.png');
   await page.screenshot({ path: contactPath });
-  console.log('Saved 08_contact_desktop.png');
+  console.log('Saved 06_contact_desktop.png');
 
   // Section 9: Light Luxury Theme Toggle
   const themeToggle = await page.$('button[aria-label*="theme" i], button[aria-label*="mode" i], button[aria-label*="Light" i], button[aria-label*="Dark" i]');

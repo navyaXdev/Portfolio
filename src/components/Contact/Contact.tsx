@@ -19,7 +19,7 @@ export const Contact: React.FC = () => {
     <section id="contact" className="py-24 relative border-t border-white/5 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          index="07"
+          index="05"
           tag="GET IN TOUCH"
           title="Let's Connect & Collaborate"
           subtitle="Open for cybersecurity mentorship, internship opportunities, software development roles, and technical discussions."

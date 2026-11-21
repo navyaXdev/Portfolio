@@ -9,9 +9,7 @@ import { Hero } from './components/Hero/Hero';
 import { About } from './components/About/About';
 import { Skills } from './components/Skills/Skills';
 import { GitHubActivity } from './components/GitHubActivity/GitHubActivity';
-import { Experience } from './components/Experience/Experience';
 import { Achievements } from './components/Achievements/Achievements';
-import { Roadmap } from './components/Roadmap/Roadmap';
 import { Contact } from './components/Contact/Contact';
 import { Footer } from './components/Footer/Footer';
 
@@ -40,9 +38,7 @@ export const App: React.FC = () => {
           <About />
           <Skills />
           <GitHubActivity />
-          <Experience />
           <Achievements />
-          <Roadmap />
           <Contact />
         </main>
 

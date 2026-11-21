@@ -115,17 +115,11 @@ async function run() {
   });
   await new Promise((r) => setTimeout(r, 400));
 
-  // Section 5: Journey / Experience Desktop
-  await scrollToSection('experience');
-  await new Promise((r) => setTimeout(r, 600));
-  await page.screenshot({ path: path.join(artifactDir, '05_journey_timeline_desktop.png') });
-  console.log('Saved 05_journey_timeline_desktop.png');
-
-  // Section 6: Achievements & Hackathons Desktop
+  // Section 5: Achievements & Hackathons Desktop
   await scrollToSection('achievements');
   await new Promise((r) => setTimeout(r, 600));
-  await page.screenshot({ path: path.join(artifactDir, '06_achievements_credentials_desktop.png') });
-  console.log('Saved 06_achievements_credentials_desktop.png');
+  await page.screenshot({ path: path.join(artifactDir, '05_achievements_credentials_desktop.png') });
+  console.log('Saved 05_achievements_credentials_desktop.png');
 
   // Test Certificate Modal Lightbox Preview
   await page.evaluate(() => {
@@ -135,20 +129,14 @@ async function run() {
     if (btn) btn.click();
   });
   await new Promise((r) => setTimeout(r, 800));
-  await page.screenshot({ path: path.join(artifactDir, '06_certificate_lightbox_modal.png') });
-  console.log('Saved 06_certificate_lightbox_modal.png');
+  await page.screenshot({ path: path.join(artifactDir, '05_certificate_lightbox_modal.png') });
+  console.log('Saved 05_certificate_lightbox_modal.png');
 
   // Close modal via Escape
   await page.keyboard.press('Escape');
   await new Promise((r) => setTimeout(r, 500));
 
-  // Section 7: Roadmap Desktop
-  await scrollToSection('roadmap');
-  await new Promise((r) => setTimeout(r, 600));
-  await page.screenshot({ path: path.join(artifactDir, '07_roadmap_progression_desktop.png') });
-  console.log('Saved 07_roadmap_progression_desktop.png');
-
-  // Section 8: Contact Finale Desktop
+  // Section 6: Contact Finale Desktop
   await scrollToSection('contact');
   await new Promise((r) => setTimeout(r, 600));
 

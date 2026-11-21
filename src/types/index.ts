@@ -6,25 +6,6 @@ export interface SkillItem {
   description: string;
 }
 
-export interface TimelineMilestone {
-  period: string;
-  title: string;
-  organization?: string;
-  role: string;
-  description: string;
-  highlights: string[];
-  tags: string[];
-  verifiedEvent?: boolean;
-}
-
-export interface RoadmapStep {
-  phase: string;
-  title: string;
-  status: 'completed' | 'in-progress' | 'upcoming';
-  summary: string;
-  deliverables: string[];
-}
-
 export interface GitHubRepo {
   id: number;
   name: string;

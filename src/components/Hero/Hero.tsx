@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowUpRight, Github, Linkedin, Mail, ChevronDown, MapPin, Compass, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, Github, Linkedin, Mail, ChevronDown, MapPin, Code2, ShieldCheck } from 'lucide-react';
 import { Button } from '../UI/Button';
 import { Badge } from '../UI/Badge';
 import { profileData } from '../../data/profile';
@@ -224,11 +224,11 @@ export const Hero: React.FC = () => {
               <Button
                 variant="primary"
                 size="md"
-                onClick={() => scrollTo('experience')}
-                icon={<Compass className="w-4 h-4" />}
+                onClick={() => scrollTo('skills')}
+                icon={<Code2 className="w-4 h-4" />}
                 className="w-full sm:w-auto min-h-[48px]"
               >
-                Explore My Journey
+                Explore Skills
               </Button>
 
               <Button

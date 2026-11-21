@@ -18,7 +18,6 @@ This project is a complete luxury-grade React architecture rebuild of Dinesh Pat
 - **Authentic Technical Fundamentals**: Focused strictly on proven competencies: Python, C/C++, HTML & CSS, JavaScript, Linux / Kali Linux, Bash & Shell, Networking Fundamentals, and Git & GitHub. No unlearned technologies or fake percentages.
 - **Central GitHub Project Destination**: Live API telemetry querying `@navyaXdev` public repositories with client-side caching (`sessionStorage`), language filters, search bar, and fallback resilience.
 - **Verified Achievements & Hackathons**: High-resolution interactive lightbox preview for NYC CodeQuest Round 3 Qualifier certificate (`CERT-2026-MFDX9C`) and Smart India Hackathon clearly badged as *Result Awaited*.
-- **Interconnected Redesigned Roadmap**: Continuous visual spine connecting milestones with scroll-linked progress illumination and pulsing halo on active milestones.
 - **Luxury Custom Cursor with Zero Native Cursor Bleed**: Global desktop cursor suppression (`cursor: none !important`), zero-latency GPU-accelerated center dot tracking, fluid lerp outer ring, and touch-device preservation.
 - **Deep Technical SEO**: Open Graph, Twitter Cards, Canonical links, XML sitemap, `robots.txt`, and Schema.org JSON-LD Person & WebSite graphs.
 
@@ -49,13 +48,11 @@ c:\WORKPLACE\Portfolio/
 │   │   ├── Achievements/    # NYC CodeQuest certificate lightbox & SIH Result Awaited
 │   │   ├── Contact/         # Direct copy email, verified profiles & mailto
 │   │   ├── CustomCursor/    # Lerp trailing ring & precision crosshair
-│   │   ├── Experience/      # Learning timeline & NYC CodeQuest 2026
 │   │   ├── Footer/          # Back to top & copyright
 │   │   ├── GitHubActivity/  # Dynamic GitHub API integration & search
 │   │   ├── Hero/            # Editorial typography, portrait & 3D tilt
 │   │   ├── Navbar/          # Sliding active pill, Sun/Moon theme toggle & drawer
 │   │   ├── Preloader/       # Boot sequence with system metrics
-│   │   ├── Roadmap/         # Interconnected phased pathway with scroll-linked spine
 │   │   ├── Skills/          # Category filter with sliding pill
 │   │   └── UI/              # Ambient background, buttons, badges, headings
 │   ├── context/
@@ -63,9 +60,7 @@ c:\WORKPLACE\Portfolio/
 │   ├── data/
 │   │   ├── achievements.ts  # Verified hackathons & credentials
 │   │   ├── profile.ts       # Verified identity, stats & bio
-│   │   ├── roadmap.ts       # Phased milestones
-│   │   ├── skills.ts        # Authentically retained engineering fundamentals
-│   │   └── timeline.ts      # Hackathons & learning history
+│   │   └── skills.ts        # Authentically retained engineering fundamentals
 │   ├── hooks/
 │   │   ├── useGitHubRepos.ts# GitHub API hook with caching & fallbacks
 │   │   ├── useMagnetic.ts   # Magnetic button effect

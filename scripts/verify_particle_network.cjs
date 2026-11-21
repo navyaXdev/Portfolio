@@ -86,25 +86,15 @@ async function run() {
   await page.screenshot({ path: path.join(artifactDir, '04_particle_network_github.png') });
   console.log('Saved 04_particle_network_github.png');
 
-  // Section 5: Journey
-  await scrollToSection('experience');
-  await page.screenshot({ path: path.join(artifactDir, '05_particle_network_journey.png') });
-  console.log('Saved 05_particle_network_journey.png');
-
-  // Section 6: Achievements
+  // Section 5: Achievements
   await scrollToSection('achievements');
-  await page.screenshot({ path: path.join(artifactDir, '06_particle_network_achievements.png') });
-  console.log('Saved 06_particle_network_achievements.png');
+  await page.screenshot({ path: path.join(artifactDir, '05_particle_network_achievements.png') });
+  console.log('Saved 05_particle_network_achievements.png');
 
-  // Section 7: Roadmap
-  await scrollToSection('roadmap');
-  await page.screenshot({ path: path.join(artifactDir, '07_particle_network_roadmap.png') });
-  console.log('Saved 07_particle_network_roadmap.png');
-
-  // Section 8: Contact
+  // Section 6: Contact
   await scrollToSection('contact');
-  await page.screenshot({ path: path.join(artifactDir, '08_particle_network_contact.png') });
-  console.log('Saved 08_particle_network_contact.png');
+  await page.screenshot({ path: path.join(artifactDir, '06_particle_network_contact.png') });
+  console.log('Saved 06_particle_network_contact.png');
 
   // Section 9: Light Luxury Theme
   await page.evaluate(() => {

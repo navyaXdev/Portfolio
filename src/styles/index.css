@@ -347,66 +347,6 @@
 }
 
 /* =========================================================
-   PIXEL-PERFECT TIMELINE SPINE & NODE ALIGNMENT
-   Unified co-axial positioning for Roadmap & Experience
-   ========================================================= */
-.timeline-track-rail {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 40px; /* Exact 40px reference axis */
-  pointer-events: none;
-}
-
-.timeline-line {
-  position: absolute;
-  left: 19px !important; /* (40px - 2px) / 2 = 19px; mathematically centered without transform conflicts */
-  width: 2px !important;
-  margin: 0 !important;
-}
-
-.timeline-node-anchor {
-  position: absolute;
-  left: 0;
-  width: 40px; /* Exact 40px reference axis */
-  height: 40px;
-  display: grid !important;
-  place-items: center !important;
-  pointer-events: none;
-}
-
-.timeline-node {
-  position: relative !important;
-  display: grid !important;
-  place-items: center !important;
-  border-radius: 50% !important;
-  box-sizing: border-box !important;
-  margin: 0 !important;
-  transform-origin: center center !important;
-}
-
-.timeline-node-inner {
-  width: 100% !important;
-  height: 100% !important;
-  display: grid !important;
-  place-items: center !important;
-  border-radius: 50% !important;
-  box-sizing: border-box !important;
-  margin: 0 !important;
-  transform-origin: center center !important;
-}
-
-.timeline-dot {
-  position: static !important;
-  display: block !important;
-  margin: 0 auto !important;
-  border-radius: 50% !important;
-  flex-shrink: 0 !important;
-  transform-origin: center center !important;
-}
-
-/* =========================================================
    CUSTOM CURSOR SYSTEM
    ========================================================= */
 /* Hide native Windows/browser cursor ONLY when custom cursor is active on desktop fine-pointer devices */
