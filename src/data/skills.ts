@@ -7,14 +7,14 @@ export const skillsData: SkillItem[] = [
     category: 'Programming',
     icon: 'Terminal',
     focus: 'Scripting, Automation & Logic',
-    description: 'Writing automation scripts, command-line utilities, network tools, and algorithmic solutions.'
+    description: 'Writing automation scripts, command-line utilities, network tools, and practical problem-solving solutions.'
   },
   {
     name: 'C / C++',
     category: 'Programming',
     icon: 'Cpu',
-    focus: 'Low-Level Logic & Systems',
-    description: 'Understanding computer science fundamentals, pointers, memory allocation, and core data structures.'
+    focus: 'Programming Fundamentals & Systems',
+    description: 'Understanding foundational programming syntax, structured code execution, and system-level basics.'
   },
   {
     name: 'JavaScript',

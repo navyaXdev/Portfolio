@@ -33,8 +33,8 @@ export const profileData = {
   ],
   pillars: [
     {
-      title: "Systems & Low-Level Thinking",
-      desc: "Delving into Linux file system permissions, memory fundamentals in C, and network protocols from first principles."
+      title: "Systems & Practical Fundamentals",
+      desc: "Delving into Linux file system permissions, foundational C programming, and network protocols from first principles."
     },
     {
       title: "Security & Network Analysis",

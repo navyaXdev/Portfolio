@@ -101,7 +101,7 @@ const FALLBACK_REPOS: GitHubRepo[] = [
     id: 1267890123,
     name: 'Python-Notes',
     full_name: 'navyaXdev/Python-Notes',
-    description: 'Comprehensive technical notes in Obsidian covering Python fundamentals, algorithms, sockets, and security modules.',
+    description: 'Comprehensive technical notes in Obsidian covering Python fundamentals, networking scripts, and security modules.',
     html_url: 'https://github.com/navyaXdev/Python-Notes',
     homepage: null,
     language: 'Python',

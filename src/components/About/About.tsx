@@ -67,8 +67,8 @@ export const About: React.FC = () => {
 
   const checkpoints = [
     'Linux Internals & Daily Terminal Driver',
-    'Low-Level Memory & Logic in C',
     'Python Scripting & Automation Tooling',
+    'Systems & C Programming Fundamentals',
     'Network Fundamentals & Socket Diagnostics',
     'Web Architecture & Frontend Standards (HTML/CSS/JS)',
     'Version Control & Source Code on GitHub',
@@ -81,7 +81,7 @@ export const About: React.FC = () => {
           index="01"
           tag="ABOUT ME"
           title="Curiosity at the System Level."
-          subtitle="Understanding systems from the inside out — from low-level memory logic to full-stack applications and real-world attack vectors."
+          subtitle="Understanding systems from the inside out — from practical programming and Linux systems to web applications and real-world attack vectors."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -99,7 +99,7 @@ export const About: React.FC = () => {
             </motion.p>
 
             <motion.p variants={itemVariants}>
-              I began with <strong className="text-white">Python</strong> and <strong className="text-white">C</strong> for foundational programming logic, memory concepts, and algorithmic thinking. I picked up web fundamentals (<strong className="text-white">HTML, CSS, JavaScript</strong>) to understand how web pages render and interact with client-side state, and I spend significant time working directly in the terminal—mastering Bash scripting, Linux filesystem permissions, and network diagnostics.
+              My programming journey began with <strong className="text-white">Python</strong>, focusing on core programming logic, scripting, and practical automation. As I progressed, I explored <strong className="text-white">C</strong> to understand foundational programming concepts and systems basics. I picked up web fundamentals (<strong className="text-white">HTML, CSS, JavaScript</strong>) to understand how web pages render and interact with client-side state, and I spend significant time working directly in the terminal—mastering Bash scripting, Linux filesystem permissions, and network diagnostics.
             </motion.p>
 
             <motion.p variants={itemVariants}>
